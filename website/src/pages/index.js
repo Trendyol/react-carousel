@@ -66,7 +66,7 @@ function Feature({ imageUrl, title, description }) {
 }
 
 function Home() {
-	return <Redirect to="/docs/installation" />;
+	return <Redirect to="/react-carousel/docs/installation" />;
 	const context = useDocusaurusContext();
 	const { siteConfig = {} } = context;
 	return (

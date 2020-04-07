@@ -1,11 +1,11 @@
 module.exports = {
 	title: 'Carousel',
 	tagline: 'Lightweight carousel component for React',
-	url: 'https://trendyol.github.io/react-carousel',
-	baseUrl: '/',
+	url: 'https://trendyol.github.io',
+	baseUrl: '/react-carousel/',
 	favicon: 'img/icon.png',
 	organizationName: 'Trendyol',
-	projectName: 'carousel',
+	projectName: 'react-carousel',
 	themeConfig: {
 		navbar: {
 			title: 'React Carousel',
