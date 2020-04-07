@@ -1,6 +1,6 @@
 .DS_Store
 website
-docs
 .circleci
-test
+__test__
 coverage
+src
