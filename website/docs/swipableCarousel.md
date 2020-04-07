@@ -1,6 +1,6 @@
 ---
 id: swipible
-title: Swipible Carousel
+title: Swipeable Carousel
 ---
 
 Carousel is infinite at default
