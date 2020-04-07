@@ -25,8 +25,8 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm lint:staged",
-			"pre-push": "npm test"
+			"pre-commit": "npm run lint:staged",
+			"pre-push": "npm run test"
 		}
 	},
 	"keywords": [
