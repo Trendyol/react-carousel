@@ -4,6 +4,9 @@ defaults: &defaults
   docker:
     - image: circleci/node:10
 
+orbs:
+  codecov: codecov/codecov@1.0.5
+
 jobs:
   test:
     <<: *defaults
@@ -20,6 +23,8 @@ jobs:
       - run:
           name: Run tests
           command: npm test
+      - codecov/upload:
+          file: coverage/*.json
       - save_cache:
           paths:
             - node_modules

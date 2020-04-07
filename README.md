@@ -1,6 +1,8 @@
 # React Carousel
 
-Please visit to [docs website](https://trendyol.github.io/react-carousel/docs/installation) to more details.
+[![Trendyol](https://circleci.com/gh/Trendyol/react-carousel.svg?style=svg)](<LINK>)
+
+Please visit to [docs website](https://trendyol.github.io/react-carousel/docs/installation) for more details.
 
 # Installation
 
@@ -26,3 +28,4 @@ ReactDOM.render(
 	document.getElementById('root'),
 );
 ```
+
