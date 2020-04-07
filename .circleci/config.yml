@@ -15,6 +15,9 @@ jobs:
             - v1-dependencies-
       - run: npm install
       - run:
+          name: Run build
+          command: npm run build
+      - run:
           name: Run tests
           command: npm test
       - save_cache:
@@ -49,6 +52,9 @@ jobs:
 
 workflows:
   version: 2
+  test:
+    jobs:
+      - test
   test-deploy:
     jobs:
       - test:
