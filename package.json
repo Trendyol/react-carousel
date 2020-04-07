@@ -12,7 +12,6 @@
 	"scripts": {
 		"build": "rollup -c --environment BUILD:production",
 		"dev": "rollup -c -w --environment BUILD:development",
-		"publish": "npm publish",
 		"fmt": "prettier --write 'src/**/*.{ts,tsx,css}' *.{js,json,md} && npm run lint:fix",
 		"lint": "tslint -t verbose -c tslint.json 'src/**/*.{ts,tsx}'",
 		"lint:fix": "tslint -t verbose -c tslint.json --fix 'src/**/*.{ts,tsx}'",
