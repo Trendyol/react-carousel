@@ -1,0 +1,6 @@
+.DS_Store
+website
+docs
+.circleci
+test
+coverage

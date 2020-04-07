@@ -1,0 +1,24 @@
+{
+	"defaultSeverity": "error",
+	"extends": ["tslint:recommended", "tslint-react-hooks"],
+	"jsRules": {
+		"trailing-comma": false
+	},
+	"rules": {
+		"interface-name": [true, "never-prefix"],
+		"no-console": false,
+		"no-shadowed-variable": false,
+		"arrow-parens": false,
+		"trailing-comma": false,
+		"member-access": [true, "no-public"],
+		"callable-types": false,
+		"no-empty-interface": false,
+		"only-arrow-functions": false,
+		"variable-name": [true, "allow-leading-underscore", "allow-pascal-case"],
+		"object-literal-sort-keys": false
+	},
+	"rulesDirectory": [],
+	"linterOptions": {
+		"exclude": ["./**/node_modules/**"]
+	}
+}
