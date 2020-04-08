@@ -8,7 +8,7 @@ Please visit to [docs website](https://trendyol.github.io/react-carousel/docs/in
 # Installation
 
 ```
-npm i react react-dom @trendyol/react-carousel --save
+npm i react react-dom @trendyol-js/react-carousel --save
 ```
 
 # Usage
@@ -16,7 +16,7 @@ npm i react react-dom @trendyol/react-carousel --save
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Carousel } from '@trendyol/react-carousel';
+import { Carousel } from '@trendyol-js/react-carousel';
 import { Item } from './yourItem';
 
 ReactDOM.render(
@@ -29,4 +29,3 @@ ReactDOM.render(
 	document.getElementById('root'),
 );
 ```
-

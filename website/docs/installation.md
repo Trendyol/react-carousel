@@ -9,7 +9,7 @@ Carousel requires React 16.8 or greater.
 ## Installation
 
 ```
-npm i react react-dom @trendyol/react-carousel --save
+npm i react react-dom @trendyol-js/react-carousel --save
 ```
 
 ---
@@ -17,5 +17,5 @@ npm i react react-dom @trendyol/react-carousel --save
 ## Importing
 
 ```jsx
-import { Carousel } from '@trendyol/react-carousel';
+import { Carousel } from '@trendyol-js/react-carousel';
 ```

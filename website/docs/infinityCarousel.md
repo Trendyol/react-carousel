@@ -5,7 +5,7 @@ title: Infinite Carousel
 
 Carousel is infinite at default
 
-import {Carousel} from '@trendyol/react-carousel';
+import {Carousel} from '@trendyol-js/react-carousel';
 export const Highlight = ({children, color}) => ( <span style={{
   backgroundColor: color,
   borderRadius: '2px',

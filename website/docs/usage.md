@@ -8,7 +8,7 @@ Simple carousel that show one item per slide.
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Carousel } from '@trendyol/react-carousel';
+import { Carousel } from '@trendyol-js/react-carousel';
 import { Item } from './yourItem';
 
 ReactDOM.render(

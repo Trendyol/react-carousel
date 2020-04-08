@@ -3,9 +3,9 @@ id: swipible
 title: Swipeable Carousel
 ---
 
-Carousel is infinite at default
+You can swipe items with your mouse our touch screen
 
-import {Carousel} from '@trendyol/react-carousel';
+import {Carousel} from '@trendyol-js/react-carousel';
 export const Highlight = ({children, color}) => ( <span style={{
   backgroundColor: color,
   borderRadius: '2px',

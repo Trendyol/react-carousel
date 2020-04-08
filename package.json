@@ -1,5 +1,5 @@
 {
-	"name": "@trendyol/react-carousel",
+	"name": "@trendyol-js/react-carousel",
 	"version": "1.0.0",
 	"description": "Lightweight carousel component for react",
 	"main": "dist/cjs/index.js",
