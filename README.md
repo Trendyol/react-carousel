@@ -2,6 +2,8 @@
 
 [![Circleci](https://circleci.com/gh/Trendyol/react-carousel.svg?style=svg)](https://circleci.com/gh/Trendyol/react-carousel)
 [![codecov.io](https://codecov.io/github/Trendyol/react-carousel/coverage.svg?branch=master)](https://codecov.io/github/Trendyol/react-carousel?branch=master)
+[![badgen.net](https://badgen.net/bundlephobia/minzip/@trendyol-js/react-carousel)](https://badgen.net/bundlephobia/minzip/@trendyol-js/react-carousel)
+[![npm version](https://badge.fury.io/js/%40trendyol-js%2Freact-carousel.svg)](https://badge.fury.io/js/%40trendyol-js%2Freact-carousel)
 
 Please visit to [docs website](https://trendyol.github.io/react-carousel/docs/installation) for more details.
 
@@ -29,3 +31,7 @@ ReactDOM.render(
 	document.getElementById('root'),
 );
 ```
+
+# License
+Distributed under the MIT License. See `LICENSE` for more information.
+
