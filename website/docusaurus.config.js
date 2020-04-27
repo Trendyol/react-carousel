@@ -6,7 +6,11 @@ module.exports = {
 	favicon: 'img/icon.png',
 	organizationName: 'Trendyol',
 	projectName: 'react-carousel',
+	plugins: ['@docusaurus/plugin-google-analytics'],
 	themeConfig: {
+		googleAnalytics: {
+			trackingID: 'UA-163119464-1',
+		},
 		navbar: {
 			title: 'React Carousel',
 			logo: {
@@ -65,7 +69,8 @@ module.exports = {
 						},
 						{
 							label: 'Youtube',
-							href: 'https://www.youtube.com/channel/UCUBiayLMggBAsiYvGLzQJ5w/',
+							href:
+								'https://www.youtube.com/channel/UCUBiayLMggBAsiYvGLzQJ5w/',
 						},
 					],
 				},
@@ -79,7 +84,8 @@ module.exports = {
 			{
 				docs: {
 					sidebarPath: require.resolve('./sidebars.js'),
-					editUrl: 'https://github.com/trendyol/react-carousel/edit/master/website/',
+					editUrl:
+						'https://github.com/trendyol/react-carousel/edit/master/website/',
 				},
 				theme: {
 					customCss: require.resolve('./src/css/custom.css'),
