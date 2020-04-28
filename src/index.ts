@@ -1,3 +1,4 @@
 import { Carousel } from './components/carousel';
+import { Slider } from './components/slider';
 
-export { Carousel };
+export { Carousel, Slider };
