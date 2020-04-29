@@ -1,4 +1,4 @@
 import { Carousel } from './components/carousel';
-import { Slider } from './components/slider';
+import { ScrollingCarousel } from './components/scrolling-carousel';
 
-export { Carousel, Slider };
+export { Carousel, ScrollingCarousel };

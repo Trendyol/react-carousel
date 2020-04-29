@@ -51,7 +51,9 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			isSliding: true,
 		});
 		setCurrent(next);
-		setShowArrow(getShowArrow(props.children.length, props.show, props.infinite, next));
+		setShowArrow(
+			getShowArrow(props.children.length, props.show, props.infinite, next),
+		);
 		setTimeout(() => {
 			if (props.infinite) {
 				setItems(cleanItems(rotated, slide, direction));
