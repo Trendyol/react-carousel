@@ -10,6 +10,7 @@ module.exports = {
 			statements: 100,
 		},
 	},
+	coveragePathIgnorePatterns: ['<rootDir>/src/components/scrolling-carousel'],
 	testPathIgnorePatterns: ['<rootDir>/__tests__/__fixtures__/'],
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',

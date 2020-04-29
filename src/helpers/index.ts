@@ -133,3 +133,13 @@ export function getPageX(e: TouchEvent | MouseEvent): number {
 	}
 	return 0;
 }
+
+export function getOuterWidth(el: HTMLElement) {
+	const style = getComputedStyle(el);
+
+	return (
+		el.offsetWidth +
+		(parseInt(style.marginLeft, 10) || 0) +
+		(parseInt(style.marginRight, 10) || 0)
+	);
+}

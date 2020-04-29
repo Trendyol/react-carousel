@@ -2,6 +2,7 @@ import React, { MouseEvent, TouchEvent } from 'react';
 import * as helpers from '../src/helpers';
 import { carouselItemNodes } from './__fixtures__/nodes';
 import { SlideDirection } from '../src/types/carousel';
+import { getOuterWidth } from '../src/helpers';
 
 describe('helpers', () => {
 	it('should return to head of circular items list', async () => {
@@ -66,5 +67,14 @@ describe('helpers', () => {
 		const result = helpers.getPageX(event as TouchEvent);
 
 		expect(result).toEqual(pageX);
+	});
+
+	it('should return width of element', async () => {
+		const width = 30;
+		const element = document.createElement('div');
+		Object.defineProperty(element, 'offsetWidth', { value: width });
+		const result = getOuterWidth(element);
+
+		expect(result).toEqual(width);
 	});
 });
