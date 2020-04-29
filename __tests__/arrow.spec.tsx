@@ -7,7 +7,7 @@ describe('<Arrow />', () => {
 
 	it('should call onClick prop when click event occurs', async () => {
 		const onClick = jest.fn();
-		const { getByRole } = render(<Arrow onClick={onClick} />);
+		const { getByRole } = render(<Arrow direction="left" onClick={onClick} />);
 
 		fireEvent.click(getByRole('button'));
 		expect(onClick).toHaveBeenCalled();
