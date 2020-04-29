@@ -112,7 +112,10 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			className={`${styles.carouselBase} ${props.className}`}
 		>
 			{showArrow.left && (
-				<Arrow onClick={() => slide(SlideDirection.Left, props.slide)} />
+				<Arrow
+					direction="left"
+					onClick={() => slide(SlideDirection.Left, props.slide)}
+				/>
 			)}
 			<ItemProvider
 				{...props}
@@ -124,7 +127,10 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				widthCallBack={widthCallBack}
 			/>
 			{showArrow.right && (
-				<Arrow onClick={() => slide(SlideDirection.Right, props.slide)} />
+				<Arrow
+					direction="right"
+					onClick={() => slide(SlideDirection.Right, props.slide)}
+				/>
 			)}
 		</div>
 	);
