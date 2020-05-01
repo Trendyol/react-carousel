@@ -12,7 +12,9 @@ const slideData = [{"text":"skyline","img":"data:image/jpeg;base64,/9j/4AAQSkZJR
 <ScrollingCarousel className="scrolling-carousel-example1">
 {
   slideData.map((d, i) => 
-    <div key={i} style={{
+    <div key={i}
+      onClick={() => console.log('CLICK')}
+      style={{
       cursor: "pointer",
       display: "flex",
       border: "1px solid #DFE1E5",
