@@ -44,7 +44,7 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 				node.addEventListener('scroll', onScroll);
 			}
 		},
-		[slider],
+		[slider, children],
 	);
 
 	const mouseDown = (e: MouseEvent) => {
