@@ -29,6 +29,10 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 		getShowArrow(props.children.length, props.show, props.infinite, current),
 	);
 
+	React.useEffect(() => {
+		setItems(initItems(props.children, props.slide, props.infinite));
+	}, userProps.children);
+
 	const slide = (direction: SlideDirection, slide: number): void => {
 		if (
 			animation.isSliding ||
