@@ -1,81 +1,101 @@
 version: 2.1
 
 defaults: &defaults
-  docker:
-    - image: circleci/node:10
+    docker:
+        - image: circleci/node:10
 
 orbs:
-  codecov: codecov/codecov@1.0.5
+    codecov: codecov/codecov@1.0.5
 
 jobs:
-  test:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: npm install
-      - run:
-          name: Run build
-          command: npm run build
-      - run:
-          name: Run tests
-          command: npm test
-      - codecov/upload:
-          file: coverage/*.json
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm build
-      - persist_to_workspace:
-          root: .
-          paths:
-            - README.md
-            - CHANGELOG.md
-            - LICENSE
-            - package.json
-            - package-lock.json
-            - .npmignore
-            - dist
-  deploy:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: List Workspace
-          command: ls
-      - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-      - run:
-          name: Publish package
-          command: npm publish --access=public
+    test:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ checksum "package.json" }}
+                      - v1-dependencies-
+            - run: npm install
+            - run:
+                  name: Run build
+                  command: npm run build
+            - run:
+                  name: Run tests
+                  command: npm test
+            - codecov/upload:
+                  file: coverage/*.json
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: v1-dependencies-{{ checksum "package.json" }}
+            - run: npm build
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - README.md
+                      - CHANGELOG.md
+                      - LICENSE
+                      - package.json
+                      - package-lock.json
+                      - .npmignore
+                      - dist
+    deploy:
+        <<: *defaults
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: List Workspace
+                  command: ls
+            - run:
+                  name: Authenticate with registry
+                  command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+            - run:
+                  name: Publish package
+                  command: npm publish --access=public
+    beta_deploy:
+        <<: *defaults
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: List Workspace
+                  command: ls
+            - run:
+                  name: Authenticate with registry
+                  command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+            - run:
+                  name: Publish package
+                  command: npm publish --access=public --tag beta
 
 workflows:
-  version: 2
-  test:
-    jobs:
-      - test
-  test-deploy:
-    jobs:
-      - test:
-          filters:
-            tags:
-              only: /^v.*/
-      - hold:
-          type: approval
-          requires:
+    version: 2
+    test:
+        jobs:
             - test
-          filters:
-            branches:
-              only: master
-      - deploy:
-          requires:
-            - hold
-          filters:
-            branches:
-              only: master
+    test-deploy:
+        jobs:
+            - test:
+                  filters:
+                      tags:
+                          only: /^v.*/
+            - hold:
+                  type: approval
+                  requires:
+                      - test
+                  filters:
+                      branches:
+                          only: master
+            - deploy:
+                  requires:
+                      - hold
+                  filters:
+                      branches:
+                          only: master
+            - beta_deploy:
+                  requires:
+                      - hold
+                  filters:
+                      branches:
+                          only: master
