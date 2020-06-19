@@ -99,3 +99,22 @@ workflows:
                   filters:
                       branches:
                           only: master
+    test-betadeploy:
+        jobs:
+            - test:
+                  filters:
+                      tags:
+                          only: /^v.*/
+            - hold:
+                  type: approval
+                  requires:
+                      - test
+                  filters:
+                      branches:
+                          only: master
+            - beta_deploy:
+                  requires:
+                      - hold
+                  filters:
+                      branches:
+                          only: master
