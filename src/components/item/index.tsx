@@ -10,7 +10,7 @@ import { getPageX } from '../../helpers';
 import { useWindowWidthChange } from '../../hooks';
 import styles from '../../styles/styles.module.css';
 
-export const ItemProviderBase: FunctionComponent<ItemProviderProps> = (
+export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 	props: ItemProviderProps,
 ) => {
 	const [width, setWidth] = useState(200);
@@ -116,7 +116,6 @@ export const ItemProviderBase: FunctionComponent<ItemProviderProps> = (
 	);
 };
 
-export const ItemProvider = React.memo(ItemProviderBase);
 export interface ItemProviderProps {
 	items: Item[];
 	show: number;
