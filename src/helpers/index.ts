@@ -143,3 +143,9 @@ export function getOuterWidth(el: HTMLElement) {
 		(parseInt(style.marginRight, 10) || 0)
 	);
 }
+
+export function updateNodes(oldItems: Item[], newItems: Item[]): Item[] {
+	return oldItems.map((oldItem) => {
+		return newItems.find((newItem) => oldItem.key === newItem.key) as Item;
+	});
+}

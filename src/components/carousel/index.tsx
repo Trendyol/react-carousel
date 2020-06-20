@@ -8,6 +8,7 @@ import {
 	initItems,
 	getShowArrow,
 	cleanItems,
+	updateNodes,
 } from '../../helpers';
 import { SlideDirection, Item, ArrowKeys } from '../../types/carousel';
 import { defaultProps } from './defaultProps';
@@ -30,7 +31,8 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	);
 
 	React.useEffect(() => {
-		setItems(initItems(props.children, props.slide, props.infinite));
+		const newItems = updateNodes(items, userProps.children);
+		setItems(newItems);
 	}, userProps.children);
 
 	const slide = (direction: SlideDirection, slide: number): void => {
@@ -72,11 +74,11 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 		}, props.transition * 1_0_0_0);
 	};
 
-	const widthCallBack = (calculatedWidth: number, slide: number) => {
+	const widthCallBack = (calculatedWidth: number) => {
 		setWidth(calculatedWidth);
 		setAnimation({
 			transform: props.infinite
-				? getTransformAmount(calculatedWidth, slide, SlideDirection.Right)
+				? getTransformAmount(calculatedWidth, props.slide, SlideDirection.Right)
 				: 0,
 			transition: 0,
 			isSliding: false,

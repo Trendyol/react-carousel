@@ -19,7 +19,7 @@ export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 			if (node !== null) {
 				const calculated = node.getBoundingClientRect().width / props.show;
 				setWidth(calculated);
-				props.widthCallBack(calculated, props.slide);
+				props.widthCallBack(calculated);
 			}
 		},
 		[width],
@@ -120,7 +120,7 @@ export interface ItemProviderProps {
 	items: Item[];
 	show: number;
 	slide: number;
-	widthCallBack: (width: number, slide: number) => void;
+	widthCallBack: (width: number) => void;
 	dragCallback: (transform: number) => void;
 	slideCallback: (direction: SlideDirection) => void;
 	transition: number;

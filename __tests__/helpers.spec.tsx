@@ -1,7 +1,7 @@
 import React, { MouseEvent, TouchEvent } from 'react';
 import * as helpers from '../src/helpers';
-import { carouselItemNodes } from './__fixtures__/nodes';
-import { SlideDirection } from '../src/types/carousel';
+import { carouselItemNodes, reactNodes } from './__fixtures__/nodes';
+import { SlideDirection, Item } from '../src/types/carousel';
 import { getOuterWidth } from '../src/helpers';
 
 describe('helpers', () => {
@@ -76,5 +76,15 @@ describe('helpers', () => {
 		const result = getOuterWidth(element);
 
 		expect(result).toEqual(width);
+	});
+
+	it('should update nodes', async () => {
+		const oldNodes = reactNodes('old', 5) as Item[];
+		const newNodes = reactNodes('new', 6) as Item[];
+		const expected = reactNodes('new', 5) as Item[];
+
+		const result = helpers.updateNodes(oldNodes, newNodes);
+
+		expect(result).toEqual(expected);
 	});
 });

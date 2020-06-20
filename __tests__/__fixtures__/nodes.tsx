@@ -5,3 +5,12 @@ export const carouselItemNodes = (len: number) => {
 		return <div style={{ height: 600 }}>{i + 1}</div>;
 	});
 };
+
+export const reactNodes = (prop: string, len: number) => {
+	return new Array(len).fill(0).map((_, i) => {
+		return {
+			key: i,
+			props: `${prop}-i`,
+		};
+	});
+};
