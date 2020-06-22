@@ -2,7 +2,7 @@ import React, { MouseEvent } from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import { Carousel } from '../src/components/carousel';
 import { defaultProps } from '../src/components/carousel/defaultProps';
-import { carouselItemNodes } from './__fixtures__/nodes';
+import { carouselItemNodes, dynamicCarouselItemNodes } from './__fixtures__/nodes';
 import * as helpers from '../src/helpers';
 
 describe('<Carousel />', () => {
@@ -40,7 +40,11 @@ describe('<Carousel />', () => {
 
 	it('should render right layout', async () => {
 		const { getByTestId } = render(
-			<Carousel {...defaultProps} infinite={false} children={carouselItemNodes(6)} />,
+			<Carousel
+				{...defaultProps}
+				infinite={false}
+				children={carouselItemNodes(6)}
+			/>,
 		);
 		const carousel = getByTestId('carousel');
 
@@ -52,7 +56,11 @@ describe('<Carousel />', () => {
 
 	it('should transform when pressing arrow keys', async () => {
 		const { getByTestId } = render(
-			<Carousel {...defaultProps} children={carouselItemNodes(6)} useArrowKeys={true} />,
+			<Carousel
+				{...defaultProps}
+				children={carouselItemNodes(6)}
+				useArrowKeys={true}
+			/>,
 		);
 		const carousel = getByTestId('carousel');
 
@@ -69,7 +77,11 @@ describe('<Carousel />', () => {
 
 	it("shouldn't listen keyboard event if useArrowKeys option false", async () => {
 		const { getByTestId } = render(
-			<Carousel {...defaultProps} children={carouselItemNodes(6)} useArrowKeys={false} />,
+			<Carousel
+				{...defaultProps}
+				children={carouselItemNodes(6)}
+				useArrowKeys={false}
+			/>,
 		);
 		const carousel = getByTestId('carousel');
 
@@ -115,7 +127,11 @@ describe('<Carousel />', () => {
 
 	it('should slide to left when click left button', async () => {
 		const { getByTestId } = render(
-			<Carousel {...defaultProps} infinite={true} children={carouselItemNodes(4)} />,
+			<Carousel
+				{...defaultProps}
+				infinite={true}
+				children={carouselItemNodes(4)}
+			/>,
 		);
 		const carousel = getByTestId('carousel');
 		const button = carousel.querySelector('button');
@@ -134,7 +150,11 @@ describe('<Carousel />', () => {
 
 	it('should slide to right when click right button', async () => {
 		const { getByTestId } = render(
-			<Carousel {...defaultProps} infinite={true} children={carouselItemNodes(4)} />,
+			<Carousel
+				{...defaultProps}
+				infinite={true}
+				children={carouselItemNodes(4)}
+			/>,
 		);
 		const carousel = getByTestId('carousel');
 		const button = carousel.querySelectorAll('button')[1];
@@ -218,7 +238,11 @@ describe('<Carousel />', () => {
 
 	it("shouldn't rotate items if carousel is not infinite", async () => {
 		const { getByTestId } = render(
-			<Carousel {...defaultProps} infinite={false} children={carouselItemNodes(10)} />,
+			<Carousel
+				{...defaultProps}
+				infinite={false}
+				children={carouselItemNodes(10)}
+			/>,
 		);
 		const carousel = getByTestId('carousel');
 		const button = carousel.querySelector('button');
@@ -237,7 +261,11 @@ describe('<Carousel />', () => {
 
 	it('should rotate items if carousel is infinite', async () => {
 		const { getByTestId } = render(
-			<Carousel {...defaultProps} infinite={true} children={carouselItemNodes(10)} />,
+			<Carousel
+				{...defaultProps}
+				infinite={true}
+				children={carouselItemNodes(10)}
+			/>,
 		);
 		const carousel = getByTestId('carousel');
 		const button = carousel.querySelector('button');
@@ -252,5 +280,25 @@ describe('<Carousel />', () => {
 			expect.any(Function),
 			defaultProps.transition * 1000,
 		);
+	});
+
+	it('should render stateful items when dynamic prop is true', async () => {
+		const { getByTestId } = render(
+			<Carousel
+				{...defaultProps}
+				dynamic={true}
+				infinite={true}
+				children={dynamicCarouselItemNodes()}
+			/>,
+		);
+
+		const carousel = getByTestId('trackList');
+		const button = carousel.querySelector('button');
+
+		expect(button).not.toBeNull();
+
+		fireEvent.click(button!);
+
+		expect(button!.innerHTML).toEqual('1');
 	});
 });

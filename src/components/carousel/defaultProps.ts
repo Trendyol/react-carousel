@@ -12,4 +12,5 @@ export const defaultProps: Required<CarouselProps> = {
 	className: '',
 	useArrowKeys: false,
 	a11y: {},
+	dynamic: false,
 };

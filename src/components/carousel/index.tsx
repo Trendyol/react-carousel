@@ -30,10 +30,12 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 		getShowArrow(props.children.length, props.show, props.infinite, current),
 	);
 
-	React.useEffect(() => {
-		const newItems = updateNodes(items, userProps.children);
-		setItems(newItems);
-	}, userProps.children);
+	if (props.dynamic) {
+		React.useEffect(() => {
+			const newItems = updateNodes(items, userProps.children);
+			setItems(newItems);
+		}, userProps.children);
+	}
 
 	const slide = (direction: SlideDirection, slide: number): void => {
 		if (
@@ -154,6 +156,7 @@ export interface CarouselProps {
 	className?: string;
 	useArrowKeys?: boolean;
 	a11y?: { [key: string]: string };
+	dynamic: boolean;
 }
 
 export interface CarouselState {
