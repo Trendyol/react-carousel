@@ -93,12 +93,6 @@ workflows:
                   filters:
                       branches:
                           only: master
-            - beta_deploy:
-                  requires:
-                      - hold
-                  filters:
-                      branches:
-                          only: master
     test-betadeploy:
         jobs:
             - test:
