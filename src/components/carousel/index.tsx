@@ -32,7 +32,12 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 
 	if (props.dynamic) {
 		React.useEffect(() => {
-			const newItems = updateNodes(items, userProps.children);
+			const newItems = updateNodes(
+				items,
+				userProps.children,
+				props.slide,
+				props.infinite,
+			);
 			setItems(newItems);
 		}, userProps.children);
 	}
@@ -156,7 +161,7 @@ export interface CarouselProps {
 	className?: string;
 	useArrowKeys?: boolean;
 	a11y?: { [key: string]: string };
-	dynamic: boolean;
+	dynamic?: boolean;
 }
 
 export interface CarouselState {

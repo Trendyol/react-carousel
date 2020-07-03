@@ -82,9 +82,49 @@ describe('helpers', () => {
 		const oldNodes = reactNodes('old', 5) as Item[];
 		const newNodes = reactNodes('new', 6) as Item[];
 		const expected = reactNodes('new', 5) as Item[];
+		const infinite = true;
+		const slide = 5;
 
-		const result = helpers.updateNodes(oldNodes, newNodes);
+		const result = helpers.updateNodes(oldNodes, newNodes, slide, infinite);
 
 		expect(result).toEqual(expected);
+	});
+
+	it('should change nodes with new items when nodes not matched', async () => {
+		const oldNodes = reactNodes('old', 5) as Item[];
+		const infinite = true;
+		const slide = 2;
+		const newNodes = ([
+			{
+				key: 14,
+				props: '',
+			},
+			{
+				key: 15,
+				props: '',
+			},
+		] as unknown) as Item[];
+		const expectedNodes = ([
+			{
+				key: 14,
+				props: '',
+			},
+			{
+				key: 15,
+				props: '',
+			},
+			{
+				key: 14,
+				props: '',
+			},
+			{
+				key: 15,
+				props: '',
+			},
+		] as unknown) as Item[];
+
+		const result = helpers.updateNodes(oldNodes, newNodes, slide, infinite);
+
+		expect(result).toEqual(expectedNodes);
 	});
 });

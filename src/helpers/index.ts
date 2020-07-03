@@ -144,8 +144,23 @@ export function getOuterWidth(el: HTMLElement) {
 	);
 }
 
-export function updateNodes(oldItems: Item[], newItems: Item[]): Item[] {
-	return oldItems.map((oldItem) => {
+export function updateNodes(
+	oldItems: Item[],
+	newItems: Item[],
+	slide: number,
+	infinite: boolean,
+): Item[] {
+	const matchedItems = oldItems.map((oldItem) => {
 		return newItems.find((newItem) => oldItem.key === newItem.key) as Item;
 	});
+
+	if (areItemsNotMatched(matchedItems)) {
+		return initItems(newItems, slide, infinite);
+	}
+
+	return matchedItems;
+}
+
+export function areItemsNotMatched(items: Item[]): boolean {
+	return items.some((item) => item === undefined);
 }
