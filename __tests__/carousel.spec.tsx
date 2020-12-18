@@ -304,8 +304,8 @@ describe('<Carousel />', () => {
 	});
 
 	it('should invoke beforeChange when beforeChange prop is defined on slide', async () => {
-		const onBeforeChange = (direction: SlideDirection) => {
-			console.log(direction);
+		const onBeforeChange = (_: SlideDirection) => {
+			return;
 		};
 		const stub = jest.fn(onBeforeChange);
 		const { getByTestId } = render(
@@ -328,8 +328,8 @@ describe('<Carousel />', () => {
 	});
 
 	it('should invoke afterChange when afterChange prop is defined on slide', async () => {
-		const onAfterChange = (direction: SlideDirection) => {
-			console.log(direction);
+		const onAfterChange = (_: SlideDirection) => {
+			return;
 		};
 		const stub = jest.fn(onAfterChange);
 		const { getByTestId } = render(
