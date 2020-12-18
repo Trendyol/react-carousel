@@ -50,7 +50,7 @@ jobs:
                   command: ls
             - run:
                   name: Authenticate with registry
-                  command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+                  command: echo "//registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN" > .npmrc
             - run:
                   name: Publish package
                   command: npm publish --access=public
@@ -64,7 +64,7 @@ jobs:
                   command: ls
             - run:
                   name: Authenticate with registry
-                  command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+                  command: echo "//registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN" > .npmrc
             - run:
                   name: Publish package
                   command: npm publish --access=public --tag beta
