@@ -4,6 +4,7 @@ import { Carousel } from '../src/components/carousel';
 import { defaultProps } from '../src/components/carousel/defaultProps';
 import { carouselItemNodes, dynamicCarouselItemNodes } from './__fixtures__/nodes';
 import * as helpers from '../src/helpers';
+import { SlideDirection } from '../src/types/carousel';
 
 describe('<Carousel />', () => {
 	let mockGetPageX: jest.SpyInstance<
@@ -300,5 +301,53 @@ describe('<Carousel />', () => {
 		fireEvent.click(button!);
 
 		expect(button!.innerHTML).toEqual('1');
+	});
+
+	it('should invoke beforeChange when beforeChange prop is defined on slide', async () => {
+		const onBeforeChange = (direction: SlideDirection) => {
+			console.log(direction);
+		};
+		const stub = jest.fn(onBeforeChange);
+		const { getByTestId } = render(
+			<Carousel
+				{...defaultProps}
+				infinite={true}
+				children={carouselItemNodes(4)}
+				beforeChange={stub}
+			/>,
+		);
+		const carousel = getByTestId('carousel');
+		const button = carousel.querySelector('button');
+
+		expect(button).not.toBeNull();
+
+		fireEvent.click(button!);
+		jest.runAllTimers();
+
+		expect(stub).toHaveBeenCalledTimes(1);
+	});
+
+	it('should invoke afterChange when afterChange prop is defined on slide', async () => {
+		const onAfterChange = (direction: SlideDirection) => {
+			console.log(direction);
+		};
+		const stub = jest.fn(onAfterChange);
+		const { getByTestId } = render(
+			<Carousel
+				{...defaultProps}
+				infinite={true}
+				children={carouselItemNodes(4)}
+				afterChange={stub}
+			/>,
+		);
+		const carousel = getByTestId('carousel');
+		const button = carousel.querySelector('button');
+
+		expect(button).not.toBeNull();
+
+		fireEvent.click(button!);
+		jest.runAllTimers();
+
+		expect(stub).toHaveBeenCalledTimes(1);
 	});
 });
