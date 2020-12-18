@@ -51,6 +51,8 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			return;
 		}
 
+		if (props.beforeChange) props.beforeChange(direction);
+
 		const next = getCurrent(current, slide, props.children.length, direction);
 		const rotated = props.infinite
 			? rotateItems(props.children, items, next, props.show, slide, direction)
@@ -78,6 +80,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				transition: 0,
 				isSliding: false,
 			});
+			if (props.afterChange) props.afterChange(direction);
 		}, props.transition * 1_0_0_0);
 	};
 
@@ -162,6 +165,8 @@ export interface CarouselProps {
 	useArrowKeys?: boolean;
 	a11y?: { [key: string]: string };
 	dynamic?: boolean;
+	beforeChange?: ((direction: SlideDirection) => void) | null;
+	afterChange?: ((direction: SlideDirection) => void) | null;
 }
 
 export interface CarouselState {
