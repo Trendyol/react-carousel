@@ -14,7 +14,7 @@ export class Circular<T> {
 	prev(): T {
 		const i = this.currentIndex;
 		const arr = this.arr;
-		this.currentIndex = i > 0 ? i - 1 : arr.length - 1;
+		this.currentIndex = i > 0 && i < arr.length ? i - 1 : arr.length - 1;
 		return this.current();
 	}
 

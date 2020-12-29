@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export const useWindowWidthChange = (callBack: (changed: number) => any) => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);

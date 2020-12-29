@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -8,7 +8,7 @@ import { Carousel, ScrollingCarousel } from '@trendyol-js/react-carousel';
 import styles from './styles.module.css';
 import { Redirect } from '@docusaurus/router';
 
-const slideData = [
+let slideData = [
 	{
 		text: 'skyline',
 		img:
@@ -110,38 +110,7 @@ const slideData = [
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlGGm-Hh5so6PtScyr7lXrB9V13dFr7mtMJC5YlO9aaDPHfPQNRvzsFPK_&s',
 	},
 ];
-const features = [
-	{
-		title: <>Easy to Use</>,
-		imageUrl: 'img/undraw_docusaurus_mountain.svg',
-		description: (
-			<>
-				Docusaurus was designed from the ground up to be easily installed and used
-				to get your website up and running quickly.
-			</>
-		),
-	},
-	{
-		title: <>Focus on What Matters</>,
-		imageUrl: 'img/undraw_docusaurus_tree.svg',
-		description: (
-			<>
-				Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-				ahead and move your docs into the <code>docs</code> directory.
-			</>
-		),
-	},
-	{
-		title: <>Powered by React</>,
-		imageUrl: 'img/undraw_docusaurus_react.svg',
-		description: (
-			<>
-				Extend or customize your website layout by reusing React. Docusaurus can
-				be extended while reusing the same header and footer.
-			</>
-		),
-	},
-];
+
 const features2 = (num) => {
 	let i = 0;
 	return new Array(num).fill(0).map(() => {
@@ -154,6 +123,7 @@ const features2 = (num) => {
 
 function Feature({ imageUrl, title, description }) {
 	const imgUrl = useBaseUrl(imageUrl);
+
 	return (
 		<div className={classnames('col col--4', styles.feature)}>
 			{imgUrl && (
@@ -168,8 +138,124 @@ function Feature({ imageUrl, title, description }) {
 }
 
 function Home() {
-	return <Redirect to="/react-carousel/docs/installation" />;
+	//return <Redirect to="/react-carousel/docs/installation" />;
+	const [features, setFeatures] = useState([
+		{
+			id: 1,
+			title: <>1</>,
+			imageUrl: 'img/undraw_docusaurus_mountain.svg',
+			description: (
+				<>
+					Docusaurus was designed from the ground up to be easily installed and
+					used to get your website up and running quickly.
+				</>
+			),
+		},
+		{
+			id: 2,
+			title: <>2</>,
+			imageUrl: 'img/undraw_docusaurus_tree.svg',
+			description: (
+				<>
+					Docusaurus lets you focus on your docs, and we&apos;ll do the chores.
+					Go ahead and move your docs into the <code>docs</code> directory.
+				</>
+			),
+		},
+		{
+			id: 3,
+			title: <>3</>,
+			imageUrl: 'img/undraw_docusaurus_react.svg',
+			description: (
+				<>
+					Extend or customize your website layout by reusing React. Docusaurus
+					can be extended while reusing the same header and footer.
+				</>
+			),
+		},
+		{
+			id: 4,
+			title: <>4</>,
+			imageUrl: 'img/undraw_docusaurus_react.svg',
+			description: (
+				<>
+					Extend or customize your website layout by reusing React. Docusaurus
+					can be extended while reusing the same header and footer.
+				</>
+			),
+		},
+		{
+			id: 5,
+			title: <>5</>,
+			imageUrl: 'img/undraw_docusaurus_react.svg',
+			description: (
+				<>
+					Extend or customize your website layout by reusing React. Docusaurus
+					can be extended while reusing the same header and footer.
+				</>
+			),
+		},
+		{
+			id: 6,
+			title: <>6</>,
+			imageUrl: 'img/undraw_docusaurus_react.svg',
+			description: (
+				<>
+					Extend or customize your website layout by reusing React. Docusaurus
+					can be extended while reusing the same header and footer.
+				</>
+			),
+		},
+		{
+			id: 7,
+			title: <>7</>,
+			imageUrl: 'img/undraw_docusaurus_react.svg',
+			description: (
+				<>
+					Extend or customize your website layout by reusing React. Docusaurus
+					can be extended while reusing the same header and footer.
+				</>
+			),
+		},
+	]);
+
+	const [added, setAdded] = useState(false);
+	const [addedCount, setAddedCount] = useState(1);
+	const [extraItems, setExtraItems] = useState([]);
+	const addItems = () => {
+		if (addedCount > 2) {
+			return [];
+		}
+
+		const newItems = [...Array(20)].map((_, id) => {
+			const attr = {
+				id,
+				title: <>{id}</>,
+				imageUrl: 'img/undraw_docusaurus_react.svg',
+				description: (
+					<>
+						Extend or customize your website layout by reusing React.
+						Docusaurus can be extended while reusing the same header and
+						footer.
+					</>
+				),
+			};
+			return <Feature key={attr.id} {...attr} />;
+		});
+
+		if (addedCount == 1) {
+			setExtraItems(newItems.slice(8, 11));
+		} else if (addedCount == 2) {
+			setExtraItems(newItems.slice(11, 15));
+		}
+
+		setAdded(true);
+		setAddedCount(addedCount + 1);
+		return newItems;
+	};
+
 	const context = useDocusaurusContext();
+	const [dataa, setData] = useState(slideData);
 	const { siteConfig = {} } = context;
 	return (
 		<Layout
@@ -196,60 +282,33 @@ function Home() {
 			<main>
 				<section className={styles.features}>
 					<div className="container">
-						<div className="row" style={{ width: '660px', margin: 'auto' }}>
-							<ScrollingCarousel>
-								{slideData.map((d) => (
-									<div
-										style={{
-											cursor: 'pointer',
-											display: 'flex',
-											border: '1px solid #DFE1E5',
-											borderRadius: '20px',
-											height: '40px',
-											lineHeight: '38px',
-											paddingRight: '12px',
-											margin: '14px 8px 14px 0',
-										}}
-									>
-										<img
-											style={{
-												borderRadius: '16px',
-												height: '32px',
-												marginBottom: '3px',
-												marginLeft: '3px',
-												marginRight: '8px',
-												marginTop: '3px',
-												width: '32px',
-											}}
-											src={d.img}
-										/>
-										<span style={{ fontSize: '12px' }}>{d.text}</span>
-									</div>
-								))}
-							</ScrollingCarousel>
-						</div>
+						<div
+							className="row"
+							style={{ width: '660px', margin: 'auto' }}
+						></div>
 					</div>
 				</section>
 				<section className={styles.features}>
 					<div className="container">
-						<div className="row">
-							<Carousel show={5} slide={5} transition={0.5}>
-								{features2(15).map((props, idx) => (
-									<div key={idx} style={{ marginRight: '20px' }}>
-										{props.description}
-									</div>
-								))}
-							</Carousel>
-						</div>
+						<div className="row"></div>
 					</div>
 				</section>
 				{features && features.length && (
 					<section className={styles.features}>
 						<div className="container">
 							<div className="row">
-								<Carousel show={2} slide={1} transition={0.5}>
+								<button onClick={addItems}>zzz</button>
+								<Carousel
+									extraItems={extraItems}
+									beforeChange={addItems}
+									swiping={true}
+									dynamic={true}
+									show={5.15}
+									slide={5}
+									transition={0.5}
+								>
 									{features.map((props, idx) => (
-										<Feature key={idx} {...props} />
+										<Feature key={props.id} {...props} />
 									))}
 								</Carousel>
 							</div>

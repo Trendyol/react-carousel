@@ -15,4 +15,5 @@ export const defaultProps: Required<CarouselProps> = {
 	dynamic: false,
 	beforeChange: null,
 	afterChange: null,
+	extraItems: [],
 };

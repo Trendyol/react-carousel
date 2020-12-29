@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent, KeyboardEvent } from 'react';
+import React, { useState, FunctionComponent, KeyboardEvent, useEffect } from 'react';
 import { Arrow } from '../arrow';
 import { ItemProvider } from '../item';
 import {
@@ -29,20 +29,40 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	const [showArrow, setShowArrow] = useState(
 		getShowArrow(props.children.length, props.show, props.infinite, current),
 	);
+	const [dynamicElements, setDynamicElements] = useState<Item[]>(userProps.children);
+
+	/*useEffect(() => {
+		if (Array.isArray(props.extraItems) && props.extraItems.length > 0) {
+			const elements = dynamicElements.length > 0 ? dynamicElements : props.children;
+			setDynamicElements(elements.concat(props.extraItems));
+		}
+	}, [props.extraItems]);*/
+
+	useEffect(() => {
+		if (dynamicElements.length > props.children.length) {
+			slide(SlideDirection.Right, true);
+		}
+	}, [dynamicElements]);
 
 	if (props.dynamic) {
-		React.useEffect(() => {
+		useEffect(() => {
+			console.log({
+				children: userProps.children,
+				dynamicElements,
+			});
+
 			const newItems = updateNodes(
 				items,
-				userProps.children,
+				dynamicElements,
 				props.slide,
 				props.infinite,
 			);
+			console.log({ newItems });
 			setItems(newItems);
-		}, userProps.children);
+		}, [userProps.children, dynamicElements]);
 	}
 
-	const slide = (direction: SlideDirection, slide: number): void => {
+	const slide = async (direction: SlideDirection, cb?: boolean) => {
 		if (
 			animation.isSliding ||
 			(direction === SlideDirection.Right && !showArrow.right) ||
@@ -51,36 +71,47 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			return;
 		}
 
-		if (props.beforeChange) props.beforeChange(direction);
+		const dynamicElementsExists = dynamicElements.length > 0;
 
-		const next = getCurrent(current, slide, props.children.length, direction);
+		if (!cb && props.beforeChange) {
+			const extraItems = await props.beforeChange(direction);
+			if (Array.isArray(extraItems) && extraItems.length > 0) {
+				const elements =
+					dynamicElements.length > 0 ? dynamicElements : props.children;
+				setDynamicElements(elements.concat(extraItems));
+				return;
+			}
+		}
+
+		const elements = dynamicElementsExists ? dynamicElements : props.children;
+
+		const next = getCurrent(current, props.slide, elements.length, direction);
 		const rotated = props.infinite
-			? rotateItems(props.children, items, next, props.show, slide, direction)
+			? rotateItems(elements, items, next, props.show, props.slide, direction)
 			: items;
 		if (props.infinite && direction === SlideDirection.Right) {
 			setItems(rotated);
 		}
 		setAnimation({
-			transform: animation.transform + getTransformAmount(width, slide, direction),
+			transform:
+				animation.transform + getTransformAmount(width, props.slide, direction),
 			transition: props.transition,
 			isSliding: true,
 		});
 		setCurrent(next);
-		setShowArrow(
-			getShowArrow(props.children.length, props.show, props.infinite, next),
-		);
+		setShowArrow(getShowArrow(elements.length, props.show, props.infinite, next));
 		setTimeout(() => {
 			if (props.infinite) {
-				setItems(cleanItems(rotated, slide, direction));
+				setItems(cleanItems(rotated, props.slide, direction));
 			}
 			setAnimation({
 				transform: props.infinite
-					? getTransformAmount(width, slide, SlideDirection.Right)
-					: animation.transform + getTransformAmount(width, slide, direction),
+					? getTransformAmount(width, props.slide, SlideDirection.Right)
+					: animation.transform +
+					  getTransformAmount(width, props.slide, direction),
 				transition: 0,
 				isSliding: false,
 			});
-			if (props.afterChange) props.afterChange(direction);
 		}, props.transition * 1_0_0_0);
 	};
 
@@ -108,14 +139,14 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	};
 
 	const slideCallback = (direction: SlideDirection) => {
-		slide(direction, props.slide);
+		slide(direction);
 	};
 
 	const handleOnKeyDown = (e: KeyboardEvent) => {
 		if (e.keyCode === ArrowKeys.Left) {
-			slide(SlideDirection.Left, props.slide);
+			slide(SlideDirection.Left);
 		} else if (e.keyCode === ArrowKeys.Right) {
-			slide(SlideDirection.Right, props.slide);
+			slide(SlideDirection.Right);
 		}
 	};
 
@@ -128,10 +159,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			className={`${styles.carouselBase} ${props.className}`}
 		>
 			{showArrow.left && (
-				<Arrow
-					direction="left"
-					onClick={() => slide(SlideDirection.Left, props.slide)}
-				/>
+				<Arrow direction="left" onClick={() => slide(SlideDirection.Left)} />
 			)}
 			<ItemProvider
 				{...props}
@@ -143,10 +171,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				widthCallBack={widthCallBack}
 			/>
 			{showArrow.right && (
-				<Arrow
-					direction="right"
-					onClick={() => slide(SlideDirection.Right, props.slide)}
-				/>
+				<Arrow direction="right" onClick={() => slide(SlideDirection.Right)} />
 			)}
 		</div>
 	);
@@ -165,8 +190,9 @@ export interface CarouselProps {
 	useArrowKeys?: boolean;
 	a11y?: { [key: string]: string };
 	dynamic?: boolean;
-	beforeChange?: ((direction: SlideDirection) => void) | null;
+	beforeChange?: ((direction: SlideDirection) => Promise<any[] | null>) | null;
 	afterChange?: ((direction: SlideDirection) => void) | null;
+	extraItems?: any[];
 }
 
 export interface CarouselState {
