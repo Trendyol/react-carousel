@@ -4,7 +4,6 @@ import { Carousel } from '../src/components/carousel';
 import { defaultProps } from '../src/components/carousel/defaultProps';
 import { carouselItemNodes, dynamicCarouselItemNodes } from './__fixtures__/nodes';
 import * as helpers from '../src/helpers';
-import { SlideDirection } from '../src/types/carousel';
 import * as hooks from '../src/hooks';
 
 describe('<Carousel />', () => {
