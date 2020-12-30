@@ -13,7 +13,6 @@ export const defaultProps: Required<CarouselProps> = {
 	useArrowKeys: false,
 	a11y: {},
 	dynamic: false,
-	beforeChange: null,
-	afterChange: null,
-	extraItems: [],
+	paginationCallback: null,
+	pageCount: 0,
 };

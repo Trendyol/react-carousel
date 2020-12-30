@@ -13,3 +13,11 @@ export const useWindowWidthChange = (callBack: (changed: number) => any) => {
 	}, []);
 	return;
 };
+
+export const usePrevious = <T>(value: T) => {
+  const ref = useRef<T>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}

@@ -147,9 +147,14 @@ export function getOuterWidth(el: HTMLElement) {
 export function updateNodes(
 	oldItems: Item[],
 	newItems: Item[],
+	prevChildren: Item[] | undefined,
 	slide: number,
 	infinite: boolean,
 ): Item[] {
+	if (prevChildren && prevChildren.length < newItems.length) {
+		return initItems(newItems, slide, infinite);
+	}
+
 	const matchedItems = oldItems.map((oldItem) => {
 		return newItems.find((newItem) => oldItem.key === newItem.key) as Item;
 	});
