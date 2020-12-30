@@ -82,10 +82,17 @@ describe('helpers', () => {
 		const oldNodes = reactNodes('old', 5) as Item[];
 		const newNodes = reactNodes('new', 6) as Item[];
 		const expected = reactNodes('new', 5) as Item[];
+		const prevChildren = undefined;
 		const infinite = true;
 		const slide = 5;
 
-		const result = helpers.updateNodes(oldNodes, newNodes, slide, infinite);
+		const result = helpers.updateNodes(
+			oldNodes,
+			newNodes,
+			prevChildren,
+			slide,
+			infinite,
+		);
 
 		expect(result).toEqual(expected);
 	});
@@ -94,6 +101,7 @@ describe('helpers', () => {
 		const oldNodes = reactNodes('old', 5) as Item[];
 		const infinite = true;
 		const slide = 2;
+		const prevChildren = undefined;
 		const newNodes = ([
 			{
 				key: 14,
@@ -123,8 +131,44 @@ describe('helpers', () => {
 			},
 		] as unknown) as Item[];
 
-		const result = helpers.updateNodes(oldNodes, newNodes, slide, infinite);
+		const result = helpers.updateNodes(
+			oldNodes,
+			newNodes,
+			prevChildren,
+			slide,
+			infinite,
+		);
 
 		expect(result).toEqual(expectedNodes);
+	});
+
+	it('should update nodes when previous children length is less than new children', async () => {
+		const oldNodes = reactNodes('old', 5) as Item[];
+		const newNodes = reactNodes('new', 6) as Item[];
+		const prevChildren = newNodes.slice(0, 5);
+		const expected = newNodes.slice(1, 6).concat(newNodes);
+		const infinite = true;
+		const slide = 5;
+
+		const result = helpers.updateNodes(
+			oldNodes,
+			newNodes,
+			prevChildren,
+			slide,
+			infinite,
+		);
+
+		expect(result).toEqual(expected);
+	});
+
+	it('should get corre transform amount', async () => {
+		const width = 100;
+		const slideCount = 2;
+		const direction = SlideDirection.Left;
+		const expected = 200;
+
+		const result = helpers.getTransformAmount(width, slideCount, direction);
+
+		expect(result).toEqual(expected);
 	});
 });

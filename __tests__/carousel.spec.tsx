@@ -5,6 +5,7 @@ import { defaultProps } from '../src/components/carousel/defaultProps';
 import { carouselItemNodes, dynamicCarouselItemNodes } from './__fixtures__/nodes';
 import * as helpers from '../src/helpers';
 import { SlideDirection } from '../src/types/carousel';
+import * as hooks from '../src/hooks';
 
 describe('<Carousel />', () => {
 	let mockGetPageX: jest.SpyInstance<
@@ -303,51 +304,30 @@ describe('<Carousel />', () => {
 		expect(button!.innerHTML).toEqual('1');
 	});
 
-	it('should invoke beforeChange when beforeChange prop is defined on slide', async () => {
-		const onBeforeChange = (_: SlideDirection) => {
-			return;
-		};
-		const stub = jest.fn(onBeforeChange);
+	it('should slide to right when click right button', async () => {
+		const paginationCallback = jest.fn();
+		const mockUsePrevious = jest
+			.spyOn(hooks, 'usePrevious')
+			.mockImplementation(() => carouselItemNodes(2));
+
 		const { getByTestId } = render(
 			<Carousel
 				{...defaultProps}
 				infinite={true}
 				children={carouselItemNodes(4)}
-				beforeChange={stub}
+				pageCount={2}
+				paginationCallback={paginationCallback}
 			/>,
 		);
 		const carousel = getByTestId('carousel');
-		const button = carousel.querySelector('button');
+		const button = carousel.querySelectorAll('button')[1];
 
 		expect(button).not.toBeNull();
 
 		fireEvent.click(button!);
 		jest.runAllTimers();
 
-		expect(stub).toHaveBeenCalledTimes(1);
-	});
-
-	it('should invoke afterChange when afterChange prop is defined on slide', async () => {
-		const onAfterChange = (_: SlideDirection) => {
-			return;
-		};
-		const stub = jest.fn(onAfterChange);
-		const { getByTestId } = render(
-			<Carousel
-				{...defaultProps}
-				infinite={true}
-				children={carouselItemNodes(4)}
-				afterChange={stub}
-			/>,
-		);
-		const carousel = getByTestId('carousel');
-		const button = carousel.querySelector('button');
-
-		expect(button).not.toBeNull();
-
-		fireEvent.click(button!);
-		jest.runAllTimers();
-
-		expect(stub).toHaveBeenCalledTimes(1);
+		expect(paginationCallback).toHaveBeenCalledTimes(1);
+		expect(mockUsePrevious).toBeCalled();
 	});
 });
