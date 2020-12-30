@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export const useWindowWidthChange = (callBack: (changed: number) => any) => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -12,4 +12,12 @@ export const useWindowWidthChange = (callBack: (changed: number) => any) => {
 		return () => window.removeEventListener('resize', update);
 	}, []);
 	return;
+};
+
+export const usePrevious = <T>(value: T) => {
+	const ref = useRef<T>();
+	useEffect(() => {
+		ref.current = value;
+	});
+	return ref.current;
 };

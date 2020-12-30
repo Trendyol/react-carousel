@@ -14,7 +14,7 @@ export class Circular<T> {
 	prev(): T {
 		const i = this.currentIndex;
 		const arr = this.arr;
-		this.currentIndex = i > 0 ? i - 1 : arr.length - 1;
+		this.currentIndex = i > 0 && i < arr.length ? i - 1 : arr.length - 1;
 		return this.current();
 	}
 
@@ -147,9 +147,14 @@ export function getOuterWidth(el: HTMLElement) {
 export function updateNodes(
 	oldItems: Item[],
 	newItems: Item[],
+	prevChildren: Item[] | undefined,
 	slide: number,
 	infinite: boolean,
 ): Item[] {
+	if (prevChildren && prevChildren.length < newItems.length) {
+		return initItems(newItems, slide, infinite);
+	}
+
 	const matchedItems = oldItems.map((oldItem) => {
 		return newItems.find((newItem) => oldItem.key === newItem.key) as Item;
 	});
