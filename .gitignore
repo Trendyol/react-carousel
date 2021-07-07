@@ -13,3 +13,5 @@ website/i18n/*
 
 dist/
 coverage
+
+.idea

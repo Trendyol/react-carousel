@@ -3,7 +3,7 @@ import React, {
 	MouseEvent,
 	useState,
 	useRef,
-	useCallback,
+	useCallback, ReactElement,
 } from 'react';
 import { Item, SlideDirection } from '../../types/carousel';
 import styles from '../../styles/slider/styles.module.css';
@@ -12,6 +12,8 @@ import { getOuterWidth } from '../../helpers';
 export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 	children,
 	className,
+	leftIcon,
+	rightIcon
 }: SliderProps) => {
 	const slider = useRef<HTMLDivElement>(null);
 	const [isDown, setIsDown] = useState(false);
@@ -119,17 +121,21 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 		slider.current!.scrollLeft = amount;
 	};
 
+	const getArrow = (direction: SlideDirection, data: string, element?: ReactElement) => {
+		return (
+			<div data-arrow={data} onClick={() => slide(direction)}>
+				{element ?? <button />}
+			</div>
+		)
+	};
+
 	return (
 		<div className={`${styles.sliderBase} ${className}`}>
 			{showArrow.left && (
-				<div data-arrow="left">
-					<button onClick={() => slide(SlideDirection.Right)} />
-				</div>
+				getArrow(SlideDirection.Right, "left", leftIcon)
 			)}
 			{showArrow.right && (
-				<div data-arrow="right">
-					<button onClick={() => slide(SlideDirection.Left)} />
-				</div>
+				getArrow(SlideDirection.Left, "right", rightIcon)
 			)}
 			<div
 				ref={ref}
@@ -148,6 +154,8 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 export interface SliderProps {
 	children: Item[];
 	className?: string;
+	leftIcon?: ReactElement;
+	rightIcon?: ReactElement;
 }
 
 export type Arrows = {
