@@ -130,7 +130,7 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 	};
 
 	return (
-		<div className={`${styles.sliderBase} ${className}`}>
+		<div className={`${styles.sliderBase} ${className}`} data-testid="carousel">
 			{showArrow.left && (
 				getArrow(SlideDirection.Right, "left", leftIcon)
 			)}
