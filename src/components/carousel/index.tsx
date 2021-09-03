@@ -4,6 +4,7 @@ import React, {
 	KeyboardEvent,
 	useEffect,
 	useRef,
+	ReactElement,
 } from 'react';
 import { Arrow } from '../arrow';
 import { ItemProvider } from '../item';
@@ -168,7 +169,9 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			className={`${styles.carouselBase} ${props.className}`}
 		>
 			{showArrow.left && (
-				<Arrow direction="left" onClick={() => slide(SlideDirection.Left)} />
+				<div onClick={() => slide(SlideDirection.Left)}>
+					{props.leftArrow ?? <Arrow direction="left" />}
+				</div>
 			)}
 			<ItemProvider
 				{...props}
@@ -180,7 +183,9 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				widthCallBack={widthCallBack}
 			/>
 			{showArrow.right && (
-				<Arrow direction="right" onClick={() => slide(SlideDirection.Right)} />
+				<div onClick={() => slide(SlideDirection.Right)}>
+					{props.rightArrow ?? <Arrow direction="right" />}
+				</div>
 			)}
 		</div>
 	);
@@ -201,6 +206,8 @@ export interface CarouselProps {
 	dynamic?: boolean;
 	paginationCallback?: ((direction: SlideDirection) => any) | null;
 	pageCount?: number;
+	leftArrow?: ReactElement | null;
+	rightArrow?: ReactElement | null;
 }
 
 export interface CarouselState {
