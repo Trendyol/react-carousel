@@ -329,4 +329,18 @@ describe('<Carousel />', () => {
 		expect(paginationCallback).toHaveBeenCalledTimes(1);
 		expect(mockUsePrevious).toBeCalled();
 	});
+
+	it('should render custom arrows when prop is passed', async () => {
+		const { container } = render(
+			<Carousel
+				{...defaultProps}
+				leftArrow={<div className="left-arrow"/>}
+				rightArrow={<div className="right-arrow"/>}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		expect(container.getElementsByClassName("left-arrow")[0]).toBeTruthy();
+		expect(container.getElementsByClassName("right-arrow")[0]).toBeTruthy();
+	});
 });

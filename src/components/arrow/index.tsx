@@ -9,6 +9,6 @@ export const Arrow: FunctionComponent<ArrowProps> = (props: ArrowProps) => (
 	/>
 );
 export interface ArrowProps {
-	onClick: (...args: any) => any;
+	onClick?: (...args: any) => any;
 	direction: string;
 }

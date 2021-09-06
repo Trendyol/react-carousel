@@ -15,4 +15,6 @@ export const defaultProps: Required<CarouselProps> = {
 	dynamic: false,
 	paginationCallback: null,
 	pageCount: 0,
+	rightArrow: null,
+	leftArrow: null
 };
