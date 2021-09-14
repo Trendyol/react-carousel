@@ -21,3 +21,4 @@
 - [ ] Check that there isn't already a PR that solves the problem the same way to avoid creating a duplicate.
 - [ ] Provide a description in this PR that addresses **what** the PR is solving, or reference the issue that it solves (e.g. `fixes #123`).
 - [ ] Ideally, include relevant tests that fail without this PR but pass with it.
+diff --git a/.github/workflows/PULL_REQUEST_TEMPLATE.md b/.github/workflows/PULL_REQUEST_TEMPLATE.md
