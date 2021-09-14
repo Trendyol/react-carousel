@@ -159,34 +159,9 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			slide(SlideDirection.Right);
 		}
 	};
-
+	// broke tests.
 	return (
-		<div
-			{...props.a11y}
-			data-testid="carousel"
-			tabIndex={0}
-			{...(props.useArrowKeys ? { onKeyDown: handleOnKeyDown } : {})}
-			className={`${styles.carouselBase} ${props.className}`}
-		>
-			{showArrow.left && (
-				<div onClick={() => slide(SlideDirection.Left)}>
-					{props.leftArrow ?? <Arrow direction="left" />}
-				</div>
-			)}
-			<ItemProvider
-				{...props}
-				transition={animation.transition}
-				items={itemsRef.current}
-				transform={animation.transform}
-				slideCallback={slideCallback}
-				dragCallback={dragCallback}
-				widthCallBack={widthCallBack}
-			/>
-			{showArrow.right && (
-				<div onClick={() => slide(SlideDirection.Right)}>
-					{props.rightArrow ?? <Arrow direction="right" />}
-				</div>
-			)}
+		<div>
 		</div>
 	);
 };
