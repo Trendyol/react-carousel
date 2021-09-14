@@ -1,4 +1,4 @@
-name: Publish Package
+name: Pre-Release
 on:
   release:
     types: [prereleased]
