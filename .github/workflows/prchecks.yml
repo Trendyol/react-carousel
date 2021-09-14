@@ -14,9 +14,9 @@ jobs:
       packages: write 
     steps:
       - uses: actions/setup-node@v2
-          with:
-            node-version: '12.x'
-            registry-url: 'https://registry.npmjs.org'
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install
         run: npm install
       - name: Test
@@ -35,9 +35,9 @@ jobs:
       packages: write 
     steps:
       - uses: actions/setup-node@v2
-          with:
-            node-version: '12.x'
-            registry-url: 'https://registry.npmjs.org'
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install
         run: npm install
       - name: Lint
@@ -49,9 +49,9 @@ jobs:
       packages: write 
     steps:
       - uses: actions/setup-node@v2
-          with:
-            node-version: '12.x'
-            registry-url: 'https://registry.npmjs.org'
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install
         run: npm install
       - name: Build
