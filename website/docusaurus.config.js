@@ -6,6 +6,7 @@ module.exports = {
 	favicon: 'img/icon.png',
 	organizationName: 'Trendyol',
 	projectName: 'react-carousel',
+	onBrokenLinks: 'ignore',
 	themeConfig: {
 		googleAnalytics: {
 			trackingID: 'UA-163119464-1',
