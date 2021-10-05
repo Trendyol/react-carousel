@@ -16,6 +16,7 @@ jobs:
               with:
                   node-version: '12.x'
             - name: Test Build
+              working-directory: ./website
               run: |
                   if [ -e yarn.lock ]; then
                     yarn install --frozen-lockfile
@@ -34,6 +35,7 @@ jobs:
               with:
                   node-version: '12.x'
             - name: Release to GitHub Pages
+              working-directory: ./website
               env:
                   USE_SSH: false
                   GIT_USER: ${{ secrets.GIT_USER }}
