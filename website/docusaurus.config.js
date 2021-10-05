@@ -6,7 +6,6 @@ module.exports = {
 	favicon: 'img/icon.png',
 	organizationName: 'Trendyol',
 	projectName: 'react-carousel',
-	plugins: ['@docusaurus/plugin-google-analytics'],
 	themeConfig: {
 		googleAnalytics: {
 			trackingID: 'UA-163119464-1',
@@ -17,7 +16,7 @@ module.exports = {
 				alt: 'Carousel',
 				src: 'img/icon.png',
 			},
-			links: [
+			items: [
 				{
 					to: 'docs/installation',
 					activeBasePath: 'docs',
