@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://trendyol.github.io/react-carousel/blog</id>
+    <title>Carousel Blog</title>
+    <updated>2021-11-05T14:07:49.216Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://trendyol.github.io/react-carousel/blog"/>
+    <subtitle>Carousel Blog</subtitle>
+    <icon>https://trendyol.github.io/react-carousel/img/icon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[temp]]></title>
+        <id>temp</id>
+        <link href="https://trendyol.github.io/react-carousel/blog/temp"/>
+        <updated>2021-11-05T14:07:49.216Z</updated>
+    </entry>
+</feed>
