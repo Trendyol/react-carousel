@@ -138,7 +138,7 @@ function Feature({ imageUrl, title, description }) {
 }
 
 function Home() {
-	//return <Redirect to="/react-carousel/docs/installation" />;
+	return <Redirect to="/react-carousel/docs/installation" />;
 	const [features, setFeatures] = useState([
 		{
 			id: 1,

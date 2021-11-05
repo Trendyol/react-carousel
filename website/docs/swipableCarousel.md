@@ -1,5 +1,5 @@
 ---
-id: swipible
+slug: swipible
 title: Swipeable Carousel
 ---
 

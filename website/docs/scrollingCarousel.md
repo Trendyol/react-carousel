@@ -1,5 +1,5 @@
 ---
-id: scrolling-carousel
+slug: scrolling-carousel
 title: Scrolling carousel
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: infinity
+slug: infinity
 title: Infinite Carousel
 ---
 

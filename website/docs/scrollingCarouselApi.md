@@ -1,5 +1,5 @@
 ---
-id: scrolling-carousel-api
+slug: scrolling-carousel-api
 title: Scrolling Carousel
 ---
 

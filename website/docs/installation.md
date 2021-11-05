@@ -1,5 +1,5 @@
 ---
-id: installation
+slug: installation
 title: Installation Guide
 sidebar_label: Installation Guide
 ---

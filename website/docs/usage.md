@@ -1,5 +1,5 @@
 ---
-id: usage
+slug: usage
 title: Usage
 ---
 

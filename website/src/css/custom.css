@@ -24,7 +24,7 @@
 	padding: 0 var(--ifm-pre-padding);
 }
 
-.exampleCarousel1 button:first-child {
+.exampleCarousel1 div > button[data-direction='left'] {
 	background: url('https://cdn.dsmcdn.com/web/production/slick-arrow.svg') no-repeat
 		center;
 	transform: rotateZ(180deg);
@@ -33,9 +33,11 @@
 	cursor: pointer;
 	position: relative;
 	left: -16px;
+	height: 80px;
+	top: 80px;
 }
 
-.exampleCarousel1 button:last-child {
+.exampleCarousel1 div > button[data-direction='right'] {
 	background: url('https://cdn.dsmcdn.com/web/production/slick-arrow.svg') no-repeat
 		center;
 	outline: none;
@@ -43,6 +45,8 @@
 	cursor: pointer;
 	position: relative;
 	right: -16px;
+	height: 80px;
+	top: 80px;
 }
 
 .exampleCarousel1 div:first-child {
