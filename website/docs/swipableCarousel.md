@@ -16,7 +16,7 @@ export const Highlight = ({children, color}) => ( <span style={{
   margin: '16px 16px 16px 0',
 }}> {children} </span> );
 
-<Carousel className={'exampleCarousel1'} show={3.5} slide={3} swiping={true}>
+<Carousel className={'exampleCarousel1'} show={3.5} slide={2} swiping={true}>
 <Highlight color="#2d66c3">We love Web 🌐</Highlight>
 <Highlight color="#f44336">We love Developers 👩🏻‍</Highlight>
 <a target="_blank" href="https://github.com/trendyol/"><Highlight color="#d53f8c">This is our github</Highlight></a>
@@ -26,7 +26,7 @@ export const Highlight = ({children, color}) => ( <span style={{
 </Carousel>
 
 ```jsx
-<Carousel show={3.5} slide={3} swiping={true}>
+<Carousel show={3.5} slide={2} swiping={true}>
 	<Highlight color="#2d66c3">We love Web 🌐</Highlight>
 	<Highlight color="#f44336">We love Developers 👩🏻‍</Highlight>
 	<a target="_blank" href="https://github.com/trendyol/">
