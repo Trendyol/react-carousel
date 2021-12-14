@@ -4,7 +4,6 @@ import pkg from './package.json';
 import typescript from 'rollup-plugin-typescript2';
 import autoprefixer from 'autoprefixer';
 import { terser } from 'rollup-plugin-terser';
-import replace from '@rollup/plugin-replace';
 
 const isProduction = process.env.BUILD === 'production';
 
@@ -31,7 +30,6 @@ export default {
 			writeDefinitions: true,
 		}),
 		typescript({ useTsconfigDeclarationDir: true }),
-		isProduction && replace({ 'data-testid': '' }),
 		isProduction && terser(),
 	],
 	external: {
