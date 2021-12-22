@@ -48,7 +48,7 @@ module.exports = {
 					],
 				},
 				{
-					title: 'Communtiy',
+					title: 'Community',
 					items: [
 						{
 							label: 'GitHub',
