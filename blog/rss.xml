@@ -4,14 +4,14 @@
         <title>Carousel Blog</title>
         <link>https://trendyol.github.io/react-carousel/blog</link>
         <description>Carousel Blog</description>
-        <lastBuildDate>Tue, 14 Dec 2021 10:34:18 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 23 Dec 2021 08:35:35 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[temp]]></title>
             <link>https://trendyol.github.io/react-carousel/blog/temp</link>
             <guid>/temp</guid>
-            <pubDate>Tue, 14 Dec 2021 10:34:18 GMT</pubDate>
+            <pubDate>Thu, 23 Dec 2021 08:35:35 GMT</pubDate>
         </item>
     </channel>
 </rss>
