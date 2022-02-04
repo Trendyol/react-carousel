@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import { Carousel } from '../src/components/carousel';
 import { defaultProps } from '../src/components/carousel/defaultProps';
 import { carouselItemNodes, dynamicCarouselItemNodes } from './__fixtures__/nodes';
@@ -345,17 +345,28 @@ describe('<Carousel />', () => {
 	});
 
 	it('should auto swipe in given time period', async () => {
-		render(
+		jest.useFakeTimers();
+		const { getAllByText } = render(
 			<Carousel
 				{...defaultProps}
 				autoSwipe={2000}
+				show={1}
+				slide={1}
 				leftArrow={<div className="left-arrow" />}
 				rightArrow={<div className="right-arrow" />}
-				children={carouselItemNodes(6)}
+				children={carouselItemNodes(2)}
 			/>,
 		);
 
+		expect(getAllByText('2').length).toEqual(2);
 		expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 2000);
+
+		jest.advanceTimersByTime(2000);
+		jest.advanceTimersByTime(2000);
+
+		await waitFor(() => expect(getAllByText('2').length).toEqual(1), {
+			timeout: 5000,
+		});
 	});
 
 	it('should navigate to right on click to navigation item', async () => {
