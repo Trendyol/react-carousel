@@ -30,7 +30,7 @@ export default {
 			writeDefinitions: true,
 		}),
 		typescript({ useTsconfigDeclarationDir: true }),
-		isProduction && terser(),
+		isProduction && terser({ output: { comments: false } }),
 	],
 	external: {
 		react: 'react',

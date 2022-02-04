@@ -1,15 +1,29 @@
-- # Github Actions integrated.
-![Release](https://github.com/trendyol/react-carousel/actions/workflows/publish.yml/badge.svg)
+-   # [Carousel] Navigation Thumbnail Feature
+    Enables item to item navigation.
 
-- # Custom Arrows option added for both `Scrolling Carousel` and `Carousel`
 ```jsx
-<Carousel
-	leftArrow={<CustomArrow/>}
-	rightArrow={<CustomArrow/>}
-/>
+<Carousel navigation={(isSelected) => <MyNavigationThumbnail selected={isSelected}>} />
 ```
 
-- # Pagination feature added.
+-   # [Carousel] Auto Swipe Feature
+    You can pass number of milliseconds to enable auto swiping.
+
+```jsx
+<Carousel autoSwipe={3000} />
+```
+
+-   # Github Actions integrated.
+
+    ![Release](https://github.com/trendyol/react-carousel/actions/workflows/publish.yml/badge.svg)
+
+-   # Custom Arrows option added for both `Scrolling Carousel` and `Carousel`
+
+```jsx
+<Carousel leftArrow={<CustomArrow />} rightArrow={<CustomArrow />} />
+```
+
+-   # Pagination feature added.
+
 ```jsx
 <Carousel
  dynamic={true}
@@ -22,4 +36,3 @@
  <Item>
 </Carousel>
 ```
-

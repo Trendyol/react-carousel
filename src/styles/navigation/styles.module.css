@@ -1,0 +1,5 @@
+.carousel-navigation {
+	display: flex;
+	position: absolute;
+	bottom: 0;
+}

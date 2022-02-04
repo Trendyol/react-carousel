@@ -334,13 +334,72 @@ describe('<Carousel />', () => {
 		const { container } = render(
 			<Carousel
 				{...defaultProps}
-				leftArrow={<div className="left-arrow"/>}
-				rightArrow={<div className="right-arrow"/>}
+				leftArrow={<div className="left-arrow" />}
+				rightArrow={<div className="right-arrow" />}
 				children={carouselItemNodes(6)}
 			/>,
 		);
 
-		expect(container.getElementsByClassName("left-arrow")[0]).toBeTruthy();
-		expect(container.getElementsByClassName("right-arrow")[0]).toBeTruthy();
+		expect(container.getElementsByClassName('left-arrow')[0]).toBeTruthy();
+		expect(container.getElementsByClassName('right-arrow')[0]).toBeTruthy();
+	});
+
+	it('should auto swipe in given time period', async () => {
+		render(
+			<Carousel
+				{...defaultProps}
+				autoSwipe={2000}
+				leftArrow={<div className="left-arrow" />}
+				rightArrow={<div className="right-arrow" />}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 2000);
+	});
+
+	it('should navigate to right on click to navigation item', async () => {
+		const { getAllByText } = render(
+			<Carousel
+				{...defaultProps}
+				navigation={(selected: boolean) => <div>{selected ? 'X' : 'O'}</div>}
+				leftArrow={<div className="left-arrow" />}
+				rightArrow={<div className="right-arrow" />}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		const navigationButton = getAllByText('O')[3];
+
+		expect(navigationButton).not.toBeNull();
+
+		fireEvent.click(navigationButton!);
+		jest.runAllTimers();
+	});
+
+	it('should navigate to left on click to navigation item', async () => {
+		const { getByText, getAllByText } = render(
+			<Carousel
+				{...defaultProps}
+				navigation={(selected: boolean) => <div>{selected ? 'X' : 'O'}</div>}
+				leftArrow={<div className="left-arrow" />}
+				rightArrow={<div className="right-arrow" />}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		const navigationButton = getAllByText('O')[3];
+
+		expect(navigationButton).not.toBeNull();
+
+		fireEvent.click(navigationButton!);
+		jest.runAllTimers();
+
+		const leftButton = getByText('X');
+
+		expect(leftButton).not.toBeNull();
+
+		fireEvent.click(navigationButton!);
+		jest.runAllTimers();
 	});
 });

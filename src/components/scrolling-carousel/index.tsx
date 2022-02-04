@@ -3,7 +3,8 @@ import React, {
 	MouseEvent,
 	useState,
 	useRef,
-	useCallback, ReactElement,
+	useCallback,
+	ReactElement,
 } from 'react';
 import { Item, SlideDirection } from '../../types/carousel';
 import styles from '../../styles/slider/styles.module.css';
@@ -13,7 +14,7 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 	children,
 	className,
 	leftIcon,
-	rightIcon
+	rightIcon,
 }: SliderProps) => {
 	const slider = useRef<HTMLDivElement>(null);
 	const [isDown, setIsDown] = useState(false);
@@ -121,22 +122,22 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 		slider.current!.scrollLeft = amount;
 	};
 
-	const getArrow = (direction: SlideDirection, data: string, element?: ReactElement) => {
+	const getArrow = (
+		direction: SlideDirection,
+		data: string,
+		element?: ReactElement,
+	) => {
 		return (
 			<div data-arrow={data} onClick={() => slide(direction)}>
 				{element ?? <button />}
 			</div>
-		)
+		);
 	};
 
 	return (
 		<div className={`${styles.sliderBase} ${className}`} data-testid="carousel">
-			{showArrow.left && (
-				getArrow(SlideDirection.Right, "left", leftIcon)
-			)}
-			{showArrow.right && (
-				getArrow(SlideDirection.Left, "right", rightIcon)
-			)}
+			{showArrow.left && getArrow(SlideDirection.Right, 'left', leftIcon)}
+			{showArrow.right && getArrow(SlideDirection.Left, 'right', rightIcon)}
 			<div
 				ref={ref}
 				onMouseDown={mouseDown}
