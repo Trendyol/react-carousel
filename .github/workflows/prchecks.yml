@@ -19,7 +19,7 @@ jobs:
             - name: Install
               run: npm install
             - name: Commit lint
-              uses: wagoid/commitlint-github-action@v4
+              run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
             - name: Test
               run: npm run test
             - uses: codecov/codecov-action@v2
