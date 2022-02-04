@@ -111,6 +111,18 @@ export const cleanItems = (
 	return showingItems.slice(slide);
 };
 
+export const cleanNavigationItems = (
+	showingItems: any[],
+	slide: number,
+	direction: SlideDirection,
+): any[] => {
+	if (direction === SlideDirection.Left) {
+		return showingItems.slice(0, slide);
+	}
+
+	return showingItems.slice(slide);
+};
+
 export const initItems = (items: Item[], slide: number, infinite: boolean): Item[] => {
 	if (!infinite) {
 		return items;
@@ -169,3 +181,65 @@ export function updateNodes(
 export function areItemsNotMatched(items: Item[]): boolean {
 	return items.some((item) => item === undefined);
 }
+
+export const getStartIndex = (start: number, slide: number, items: any[]): number => {
+	const startIndex =
+		start + slide >= items.length ? start + slide - items.length : start + slide;
+	if (startIndex < 0) {
+		return items.length + startIndex;
+	}
+	return startIndex;
+};
+
+export const rotateNavigationItems = (
+	items: any[],
+	showingItems: any[],
+	start: number,
+	show: number,
+	slide: number,
+	direction: SlideDirection,
+): any[] => {
+	const startIndex = getStartIndex(start, slide, items);
+	const current = Math.floor(showingItems.length / 2);
+	const circular = new Circular(items, startIndex);
+	const newItems: any[] = Array.from(showingItems);
+
+	switch (+direction) {
+		case SlideDirection.Left:
+			for (let i = 0; i < current; i++) {
+				const idx = current - (Math.abs(slide) + i) - show;
+				if (idx < 0 || !newItems[idx]) {
+					newItems.unshift(circular.current());
+				}
+				circular.prev();
+			}
+			break;
+		case SlideDirection.Right:
+			for (let i = 0; i < current; i++) {
+				if (!newItems[current + slide + i + show]) {
+					newItems.push(circular.current());
+				}
+				circular.next();
+			}
+			break;
+	}
+
+	return newItems;
+};
+
+export const getNavigationSlideAmount = (
+	target: number | undefined,
+	next: number,
+	slideAmount: number,
+	direction: number,
+): number => {
+	if (typeof target === 'number') {
+		if (direction === SlideDirection.Right) {
+			return target - next + 1;
+		}
+
+		return slideAmount;
+	}
+
+	return direction * -1;
+};

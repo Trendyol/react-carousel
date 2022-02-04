@@ -3,6 +3,7 @@
 	box-sizing: border-box;
 	display: flex;
 	outline: none;
+	position: relative;
 }
 
 .item-provider {
