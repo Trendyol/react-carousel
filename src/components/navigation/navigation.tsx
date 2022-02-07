@@ -11,7 +11,7 @@ export const Navigation: React.FC<NavigationProps> = ({
 	return (
 		<div className={styles.carouselNavigation}>
 			{items.map((_: any, i: number) => (
-				<div onClick={() => onClick(i)} key={i}>
+				<div onMouseOver={() => onClick(i)} key={i}>
 					{factory(current === i)}
 				</div>
 			))}
