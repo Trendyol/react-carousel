@@ -30,7 +30,7 @@ describe('<Navigation />', () => {
 			<Navigation current={1} items={items} factory={factory} onClick={onClick} />,
 		);
 
-		fireEvent.click(getByText('selected'));
+		fireEvent.mouseOver(getByText('selected'));
 		expect(onClick).toHaveBeenCalled();
 	});
 });

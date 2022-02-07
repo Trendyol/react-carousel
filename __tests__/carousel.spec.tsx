@@ -384,7 +384,7 @@ describe('<Carousel />', () => {
 
 		expect(navigationButton).not.toBeNull();
 
-		fireEvent.click(navigationButton!);
+		fireEvent.mouseOver(navigationButton!);
 		jest.runAllTimers();
 	});
 
@@ -403,14 +403,14 @@ describe('<Carousel />', () => {
 
 		expect(navigationButton).not.toBeNull();
 
-		fireEvent.click(navigationButton!);
+		fireEvent.mouseOver(navigationButton!);
 		jest.runAllTimers();
 
 		const leftButton = getByText('X');
 
 		expect(leftButton).not.toBeNull();
 
-		fireEvent.click(navigationButton!);
+		fireEvent.mouseOver(navigationButton!);
 		jest.runAllTimers();
 	});
 });
