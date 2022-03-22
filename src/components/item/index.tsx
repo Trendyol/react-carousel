@@ -75,7 +75,11 @@ export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 			return;
 		}
 		const pos = getPageX(e);
-		setDrag({ ...drag, drag: drag.start - pos, pointers: false });
+		setDrag({
+			...drag,
+			drag: drag.start - pos,
+			pointers: Math.abs(drag.start - pos) < props.triggerClickOn,
+		});
 	};
 	const swipeProps = props.swiping
 		? {
@@ -129,4 +133,5 @@ export interface ItemProviderProps {
 	swipeOn: number;
 	responsive: boolean;
 	infinite: boolean;
+	triggerClickOn: number;
 }
