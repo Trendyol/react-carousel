@@ -1,3 +1,10 @@
+-   # [Carousel] triggerClickOn prop
+    Triggers onClick handlers of carousel items if swipe amount smaller than `triggerClickOn`.
+
+```jsx
+<Carousel triggerClickOn={5} />
+```
+
 -   # [Carousel] Navigation Thumbnail Feature
     Enables item to item navigation.
 

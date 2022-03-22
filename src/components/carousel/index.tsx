@@ -296,6 +296,7 @@ export interface CarouselProps {
 	rightArrow?: ReactElement | null;
 	autoSwipe?: number | null;
 	navigation?: null | ((selected: boolean) => ReactElement);
+	triggerClickOn?: number;
 }
 
 export interface CarouselState {
