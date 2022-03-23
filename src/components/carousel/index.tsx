@@ -70,9 +70,9 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			prevChildren?.length < props.children.length
 		) {
 			slide(SlideDirection.Right);
-			setPage(page + 1);
+			setPage((page: number) => page + 1);
 		}
-	}, [props.children]);
+	}, [ props.dynamic, props.children, props.slide, props.infinite, props.pageCount ]);
 
 	useEffect(() => {
 		autoSwipe();
