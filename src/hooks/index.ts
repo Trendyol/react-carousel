@@ -1,7 +1,15 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
+const getWindowWidth = () => {
+	if (typeof window === 'undefined') {
+		return 0;
+	}
+
+	return window.innerWidth;
+}
+
 export const useWindowWidthChange = (callBack: (changed: number) => any) => {
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [windowWidth, setWindowWidth] = useState(getWindowWidth());
 	useLayoutEffect(() => {
 		const update = () => {
 			const changed = windowWidth - window.innerWidth;
