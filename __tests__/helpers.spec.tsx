@@ -171,4 +171,27 @@ describe('helpers', () => {
 
 		expect(result).toEqual(expected);
 	});
+
+	it('should return false if hideArrows property is true', async () => {
+		const itemCount = 10;
+		const itemsToShow = 3;
+		const infinite = true;
+		const current = 1;
+		const hideArrows = true;
+
+		const expected = {
+			left: false,
+			right: false,
+		};
+
+		const result = helpers.getShowArrow({
+			itemCount,
+			itemsToShow,
+			infinite,
+			current,
+			hideArrows,
+		});
+
+		expect(result).toEqual(expected);
+	});
 });

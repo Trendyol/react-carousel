@@ -80,23 +80,38 @@ export const getCurrent = (
 	return slideTo;
 };
 
+interface GetShowArrowProps {
+	itemCount: number;
+	itemsToShow: number;
+	infinite: boolean;
+	current: number;
+	hideArrows: boolean;
+}
+
 export const getShowArrow = (
-	items: number,
-	show: number,
-	infinite: boolean,
-	current: number,
+	props: GetShowArrowProps,
 ): { left: boolean; right: boolean } => {
-	const isItemsMore = items > show;
+	const { itemCount, itemsToShow, infinite, current, hideArrows = false } = props;
+
+	if (hideArrows) {
+		return {
+			left: false,
+			right: false,
+		};
+	}
+
+	const hasMoreItems = itemCount > itemsToShow;
+
 	if (infinite) {
 		return {
-			left: isItemsMore,
-			right: isItemsMore,
+			left: hasMoreItems,
+			right: hasMoreItems,
 		};
 	}
 
 	return {
-		left: isItemsMore && current !== 0,
-		right: isItemsMore && current + show < items,
+		left: hasMoreItems && current !== 0,
+		right: hasMoreItems && current + itemsToShow < itemCount,
 	};
 };
 

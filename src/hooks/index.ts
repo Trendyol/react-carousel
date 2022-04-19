@@ -6,7 +6,7 @@ const getWindowWidth = () => {
 	}
 
 	return window.innerWidth;
-}
+};
 
 export const useWindowWidthChange = (callBack: (changed: number) => any) => {
 	const [windowWidth, setWindowWidth] = useState(getWindowWidth());

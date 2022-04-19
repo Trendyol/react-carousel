@@ -43,7 +43,13 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	});
 	const [current, setCurrent] = useState(0);
 	const [showArrow, setShowArrow] = useState(
-		getShowArrow(props.children.length, props.show, props.infinite, current),
+		getShowArrow({
+			itemCount: props.children.length,
+			itemsToShow: props.show,
+			infinite: props.infinite,
+			current,
+			hideArrows: props.hideArrows,
+		}),
 	);
 	const prevChildren = usePrevious<Item[]>(userProps.children);
 	const [page, setPage] = useState<number>(0);
@@ -149,7 +155,16 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 		});
 
 		setCurrent(isNavigation && typeof target === 'number' ? target : next);
-		setShowArrow(getShowArrow(elements.length, props.show, props.infinite, next));
+		setShowArrow(
+			getShowArrow({
+				itemCount: elements.length,
+				itemsToShow: props.show,
+				infinite: props.infinite,
+				current: next,
+				hideArrows: props.hideArrows,
+			}),
+		);
+
 		setTimeout(() => {
 			if (props.infinite) {
 				const cleanedItems = isNavigation
@@ -288,6 +303,7 @@ export interface CarouselProps {
 	infinite?: boolean;
 	className?: string;
 	useArrowKeys?: boolean;
+	hideArrows?: boolean;
 	a11y?: { [key: string]: string };
 	dynamic?: boolean;
 	paginationCallback?: ((direction: SlideDirection) => any) | null;

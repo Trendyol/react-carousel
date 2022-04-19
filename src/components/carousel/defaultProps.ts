@@ -20,4 +20,5 @@ export const defaultProps: Required<CarouselProps> = {
 	autoSwipe: null,
 	navigation: null,
 	triggerClickOn: Number.MIN_SAFE_INTEGER,
+	hideArrows: false,
 };
