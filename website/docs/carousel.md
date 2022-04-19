@@ -23,6 +23,7 @@ Creates carousel component.
 | responsive   |   boolean    |    false |   false |               enables the feature that adjusts items width according to screen size dynamically |
 | className    |    string    |    false |      "" |                                                              same as react's className property |
 | useArrowKeys |   boolean    |    false |   false |                                                           enables sliding when press arrow keys |
+| hideArrows   |   boolean    |    false |   false |                                                                                 hide arrow keys |
 | a11y         |    Array     |    false |      {} |                                                                        accessibility attributes |
 | dynamic      |   Boolean    |    false |   false | if items are stateful, specify this option as true. Also give unique key to each item (like id) |
 | rightArrow   | ReactElement |    false |    null |                                                                    custom right arrow component |
