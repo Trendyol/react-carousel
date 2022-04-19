@@ -7,7 +7,7 @@
 	"jsnext:main": "dist/es/index.js",
 	"types": "dist/types/index.d.ts",
 	"homepage": "https://trendyol.github.io/react-carousel",
-	"repository": "github:Trendyol/carousel",
+	"repository": "github:Trendyol/react-carousel",
 	"bugs": "https://github.com/Trendyol/react-carousel/issues",
 	"scripts": {
 		"build": "rollup -c --environment BUILD:production",
