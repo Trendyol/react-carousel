@@ -1,14 +1,16 @@
 import React, {
 	FunctionComponent,
-	useCallback,
-	useState,
 	MouseEvent,
 	TouchEvent,
+	useCallback,
+	useRef,
+	useState,
 } from 'react';
 import { Item, SlideDirection } from '../../types/carousel';
 import { getPageX } from '../../helpers';
 import { useWindowWidthChange } from '../../hooks';
 import styles from '../../styles/styles.module.css';
+import { PlaceHolder } from './PlaceHolder';
 
 export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 	props: ItemProviderProps,
@@ -93,6 +95,7 @@ export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 				onMouseMove: handleDragMove,
 		  }
 		: {};
+	const itemsRef = useRef<any>([]);
 
 	return (
 		<div ref={ref} className={styles.itemProvider}>
@@ -109,10 +112,28 @@ export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 				{props.items.map((item, i) => (
 					<div
 						key={i}
-						style={{ width, pointerEvents: drag.pointers ? 'all' : 'none' }}
+						style={{
+							width,
+							pointerEvents: drag.pointers ? 'all' : 'none',
+							position: 'relative',
+						}}
 						className={styles.itemContainer}
+						ref={(el) => {
+							if (props.moveToFirstPositionThanClickItem) {
+								itemsRef.current[i] = el;
+							}
+						}}
 					>
 						{item}
+						{props.moveToFirstPositionThanClickItem &&
+							i !== props.current && (
+								<PlaceHolder
+									current={props.current}
+									index={i}
+									slideToDirection={props.slideToDirection}
+									itemsRef={itemsRef}
+								/>
+							)}
 					</div>
 				))}
 			</div>
@@ -134,4 +155,7 @@ export interface ItemProviderProps {
 	responsive: boolean;
 	infinite: boolean;
 	triggerClickOn: number;
+	current: number;
+	slideToDirection: (direction: SlideDirection, target?: number) => void;
+	moveToFirstPositionThanClickItem?: boolean;
 }

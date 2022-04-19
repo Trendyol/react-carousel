@@ -87,6 +87,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			typeof props.autoSwipe === 'number' &&
 			props.autoSwipe > props.transition
 		) {
+			// @ts-ignore
 			autoSwipeTimer.current = setTimeout(() => {
 				if (slideButtonRef.current) {
 					slideButtonRef.current!.click();
@@ -259,6 +260,8 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				slideCallback={slideCallback}
 				dragCallback={dragCallback}
 				widthCallBack={widthCallBack}
+				slideToDirection={slide}
+				current={current}
 			/>
 			{showArrow.right && (
 				<div onClick={() => slide(SlideDirection.Right)} ref={slideButtonRef}>
@@ -297,6 +300,7 @@ export interface CarouselProps {
 	autoSwipe?: number | null;
 	navigation?: null | ((selected: boolean) => ReactElement);
 	triggerClickOn?: number;
+	moveToFirstPositionThanClickItem?: boolean;
 }
 
 export interface CarouselState {

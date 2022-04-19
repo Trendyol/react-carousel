@@ -1,5 +1,5 @@
 import React, {
-	FunctionComponent,
+	FC,
 	MouseEvent,
 	useState,
 	useRef,
@@ -10,12 +10,12 @@ import { Item, SlideDirection } from '../../types/carousel';
 import styles from '../../styles/slider/styles.module.css';
 import { getOuterWidth } from '../../helpers';
 
-export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
+export const ScrollingCarousel: FC<SliderProps> = ({
 	children,
 	className,
 	leftIcon,
 	rightIcon,
-}: SliderProps) => {
+}) => {
 	const slider = useRef<HTMLDivElement>(null);
 	const [isDown, setIsDown] = useState(false);
 	const [position, setPosition] = useState({
@@ -157,6 +157,7 @@ export interface SliderProps {
 	className?: string;
 	leftIcon?: ReactElement;
 	rightIcon?: ReactElement;
+	moveToFirstPositionThanClickItem?: boolean;
 }
 
 export type Arrows = {
