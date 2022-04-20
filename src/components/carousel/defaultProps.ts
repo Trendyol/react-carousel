@@ -21,4 +21,5 @@ export const defaultProps: Required<CarouselProps> = {
 	navigation: null,
 	triggerClickOn: Number.MIN_SAFE_INTEGER,
 	moveToFirstPositionThanClickItem: false,
+	hideArrows: false
 };
