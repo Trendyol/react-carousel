@@ -162,4 +162,14 @@ describe('<ItemProvider />', () => {
 		Object.defineProperty(window, 'innerWidth', { value: 5 });
 		fireEvent(window, new Event('resize'));
 	});
+	it('should render when moveToFirstPositionThanClickItem true', async () => {
+		render(
+			<ItemProvider
+				{...defaultItemProviderProps}
+				moveToFirstPositionThanClickItem={true}
+				current={2}
+				slideToDirection={jest.fn()}
+			/>,
+		);
+	});
 });
