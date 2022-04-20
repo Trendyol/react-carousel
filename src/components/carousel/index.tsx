@@ -52,8 +52,8 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	const autoSwipeTimer = useRef<number>();
 	const isNavigation = typeof props.navigation === 'function';
 
-	if (props.dynamic) {
-		useEffect(() => {
+	useEffect(() => {
+		if (props.dynamic) {
 			const newItems = updateNodes(
 				itemsRef.current,
 				props.children,
@@ -72,8 +72,8 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				slide(SlideDirection.Right);
 				setPage(page + 1);
 			}
-		}, [props.children]);
-	}
+		}
+	}, [props.children]);
 
 	useEffect(() => {
 		autoSwipe();
