@@ -11,6 +11,7 @@ module.exports = {
 		},
 	},
 	testPathIgnorePatterns: ['<rootDir>/__tests__/__fixtures__/'],
+	modulePathIgnorePatterns: ['<rootDir>/src/styles/'],
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
 		'^.+\\.css$': 'jest-transform-css',
