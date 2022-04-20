@@ -126,7 +126,9 @@ export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 					>
 						{item}
 						{props.moveToFirstPositionThanClickItem &&
-							i !== props.current && (
+							i !== props.current &&
+							props.current &&
+							props.slideToDirection && (
 								<PlaceHolder
 									current={props.current}
 									index={i}
@@ -155,7 +157,7 @@ export interface ItemProviderProps {
 	responsive: boolean;
 	infinite: boolean;
 	triggerClickOn: number;
-	current: number;
-	slideToDirection: (direction: SlideDirection, target?: number) => void;
+	current?: number;
+	slideToDirection?: (direction: SlideDirection, target?: number) => void;
 	moveToFirstPositionThanClickItem?: boolean;
 }

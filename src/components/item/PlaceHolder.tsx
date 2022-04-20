@@ -4,7 +4,7 @@ import { itemClickProvider } from '../../styles/itemPlaceholder/styles.module.cs
 
 const ANIMATION_DURATION = 750; // ms
 
-type PlaceHolderProps = {
+export type PlaceHolderProps = {
 	current: number;
 	index: number;
 	slideToDirection: (direction: SlideDirection, target?: number) => void;
@@ -29,5 +29,7 @@ export const PlaceHolder: FC<PlaceHolderProps> = ({
 			}, ANIMATION_DURATION);
 		}
 	};
-	return <div className={itemClickProvider} onClick={onClick} />;
+	return (
+		<div className={itemClickProvider} onClick={onClick} data-testid="placeholder" />
+	);
 };
