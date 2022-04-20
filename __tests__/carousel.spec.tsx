@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
-import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
-import { Carousel } from '../src/components/carousel';
+import { render, cleanup, fireEvent, waitFor, act } from '@testing-library/react';
+import { Carousel } from '../src';
 import { defaultProps } from '../src/components/carousel/defaultProps';
 import { carouselItemNodes, dynamicCarouselItemNodes } from './__fixtures__/nodes';
 import * as helpers from '../src/helpers';
@@ -67,8 +67,9 @@ describe('<Carousel />', () => {
 
 		fireEvent.click(carousel);
 		fireEvent.keyDown(carousel, { keyCode: 39 });
-		jest.runAllTimers();
-
+		act(() => {
+			jest.runAllTimers();
+		});
 		expect(setTimeout).toHaveBeenCalledTimes(1);
 		expect(setTimeout).toHaveBeenLastCalledWith(
 			expect.any(Function),
@@ -140,8 +141,9 @@ describe('<Carousel />', () => {
 		expect(button).not.toBeNull();
 
 		fireEvent.click(button!);
-		jest.runAllTimers();
-
+		act(() => {
+			jest.runAllTimers();
+		});
 		expect(setTimeout).toHaveBeenCalledTimes(1);
 		expect(setTimeout).toHaveBeenLastCalledWith(
 			expect.any(Function),
@@ -195,7 +197,9 @@ describe('<Carousel />', () => {
 
 		fireEvent.mouseMove(trackList, { pageX: 390 });
 		fireEvent.mouseUp(trackList, { pageX: 390 });
-		jest.runAllTimers();
+		act(() => {
+			jest.runAllTimers();
+		});
 
 		expect(setTimeout).toHaveBeenCalledTimes(1);
 		expect(setTimeout).toHaveBeenLastCalledWith(
@@ -228,7 +232,9 @@ describe('<Carousel />', () => {
 
 		fireEvent.mouseMove(trackList, { pageX: 190 });
 		fireEvent.mouseUp(trackList, { pageX: 190 });
-		jest.runAllTimers();
+		act(() => {
+			jest.runAllTimers();
+		});
 
 		expect(setTimeout).toHaveBeenCalledTimes(1);
 		expect(setTimeout).toHaveBeenLastCalledWith(
@@ -251,7 +257,9 @@ describe('<Carousel />', () => {
 		expect(button).not.toBeNull();
 
 		fireEvent.click(button!);
-		jest.runAllTimers();
+		act(() => {
+			jest.runAllTimers();
+		});
 
 		expect(setTimeout).toHaveBeenCalledTimes(1);
 		expect(setTimeout).toHaveBeenLastCalledWith(
@@ -274,7 +282,9 @@ describe('<Carousel />', () => {
 		expect(button).not.toBeNull();
 
 		fireEvent.click(button!);
-		jest.runAllTimers();
+		act(() => {
+			jest.runAllTimers();
+		});
 
 		expect(setTimeout).toHaveBeenCalledTimes(1);
 		expect(setTimeout).toHaveBeenLastCalledWith(
@@ -318,13 +328,16 @@ describe('<Carousel />', () => {
 				paginationCallback={paginationCallback}
 			/>,
 		);
+
 		const carousel = getByTestId('carousel');
 		const button = carousel.querySelectorAll('button')[1];
 
 		expect(button).not.toBeNull();
 
 		fireEvent.click(button!);
-		jest.runAllTimers();
+		act(() => {
+			jest.runAllTimers();
+		});
 
 		expect(paginationCallback).toHaveBeenCalledTimes(1);
 		expect(mockUsePrevious).toBeCalled();
@@ -361,8 +374,10 @@ describe('<Carousel />', () => {
 		expect(getAllByText('2').length).toEqual(2);
 		expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 2000);
 
-		jest.advanceTimersByTime(2000);
-		jest.advanceTimersByTime(2000);
+		act(() => {
+			jest.advanceTimersByTime(2000);
+			jest.advanceTimersByTime(2000);
+		});
 
 		await waitFor(() => expect(getAllByText('2').length).toEqual(1), {
 			timeout: 5000,
@@ -385,7 +400,9 @@ describe('<Carousel />', () => {
 		expect(navigationButton).not.toBeNull();
 
 		fireEvent.mouseOver(navigationButton!);
-		jest.runAllTimers();
+		act(() => {
+			jest.runAllTimers();
+		});
 	});
 
 	it('should navigate to left on click to navigation item', async () => {
@@ -404,7 +421,9 @@ describe('<Carousel />', () => {
 		expect(navigationButton).not.toBeNull();
 
 		fireEvent.mouseOver(navigationButton!);
-		jest.runAllTimers();
+		act(() => {
+			jest.runAllTimers();
+		});
 
 		const leftButton = getByText('X');
 
