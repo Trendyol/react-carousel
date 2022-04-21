@@ -125,17 +125,15 @@ export const ItemProvider: FunctionComponent<ItemProviderProps> = (
 						}}
 					>
 						{item}
-						{props.moveToFirstPositionThanClickItem &&
-							i !== props.current &&
-							props.current &&
-							props.slideToDirection && (
-								<PlaceHolder
-									current={props.current}
-									index={i}
-									slideToDirection={props.slideToDirection}
-									itemsRef={itemsRef}
-								/>
-							)}
+						{(props.moveToFirstPositionThanClickItem &&
+							props.current !== null && i !== props.current && props.slideToDirection !== null ) &&
+							<PlaceHolder
+								current={props.current!}
+								index={i}
+								slideToDirection={props.slideToDirection!}
+								itemsRef={itemsRef}
+							/>
+						}
 					</div>
 				))}
 			</div>
