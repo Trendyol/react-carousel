@@ -109,7 +109,7 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 	const smoothHorizontalScroll = (time: number, amount: number, start: number) => {
 		let curTime = 0;
 		for (let scrollCounter = 0; curTime <= time; scrollCounter++) {
-			window.setTimeout(
+			setTimeout(
 				smoothHorizontalScrollBehavior,
 				curTime,
 				(scrollCounter * amount) / 100 + start,
