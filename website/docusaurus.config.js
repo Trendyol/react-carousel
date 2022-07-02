@@ -8,7 +8,7 @@ module.exports = {
 	projectName: 'react-carousel',
 	onBrokenLinks: 'ignore',
 	themeConfig: {
-		googleAnalytics: {
+		'plugin-google-analytics': {
 			trackingID: 'UA-163119464-1',
 		},
 		navbar: {
