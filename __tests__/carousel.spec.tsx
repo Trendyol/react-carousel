@@ -413,4 +413,57 @@ describe('<Carousel />', () => {
 		fireEvent.mouseOver(navigationButton!);
 		jest.runAllTimers();
 	});
+
+	it('should call left arrow function when its passed', async () => {
+		const mockFn = jest.fn();
+		const { getByText } = render(
+			<Carousel
+				{...defaultProps}
+				leftArrow={<div>Left Arrow</div>}
+				onLeftArrowClick={mockFn}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		fireEvent.click(getByText("Left Arrow"));
+
+		expect(mockFn).toHaveBeenCalledTimes(1);
+
+		jest.runAllTimers();
+	});
+
+	it('should call right arrow function when its passed', async () => {
+		const mockFn = jest.fn();
+		const { getByText } = render(
+			<Carousel
+				{...defaultProps}
+				rightArrow={<div>Right Arrow</div>}
+				onRightArrowClick={mockFn}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		fireEvent.click(getByText("Right Arrow"));
+
+		expect(mockFn).toHaveBeenCalledTimes(1);
+
+		jest.runAllTimers();
+	});
+
+	it('should not call right arrow function when its not passed', async () => {
+		const mockFn = jest.fn();
+		const { getByText } = render(
+			<Carousel
+				{...defaultProps}
+				rightArrow={<div>Right Arrow</div>}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		fireEvent.click(getByText("Right Arrow"));
+
+		expect(mockFn).toHaveBeenCalledTimes(0);
+
+		jest.runAllTimers();
+	});
 });

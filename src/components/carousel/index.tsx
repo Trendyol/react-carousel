@@ -253,6 +253,20 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 		}
 	};
 
+	const onLeftArrowClick = () => {
+		slide(SlideDirection.Left)
+		if (props.onLeftArrowClick) {
+			props.onLeftArrowClick();
+		}
+	}
+
+	const onRightArrowClick = () => {
+		slide(SlideDirection.Right)
+		if (props.onRightArrowClick) {
+			props.onRightArrowClick();
+		}
+	}
+
 	return (
 		<div
 			{...props.a11y}
@@ -262,7 +276,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			className={`${styles.carouselBase} ${props.className}`}
 		>
 			{showArrow.left && (
-				<div onClick={() => slide(SlideDirection.Left)}>
+				<div onClick={onLeftArrowClick}>
 					{props.leftArrow ?? <Arrow direction="left" />}
 				</div>
 			)}
@@ -276,7 +290,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				widthCallBack={widthCallBack}
 			/>
 			{showArrow.right && (
-				<div onClick={() => slide(SlideDirection.Right)} ref={slideButtonRef}>
+				<div onClick={onRightArrowClick} ref={slideButtonRef}>
 					{props.rightArrow ?? <Arrow direction="right" />}
 				</div>
 			)}
@@ -313,6 +327,8 @@ export interface CarouselProps {
 	autoSwipe?: number | null;
 	navigation?: null | ((selected: boolean) => ReactElement);
 	triggerClickOn?: number;
+	onLeftArrowClick?: () => void;
+	onRightArrowClick?: () => void;
 }
 
 export interface CarouselState {
