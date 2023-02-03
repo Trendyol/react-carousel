@@ -61,13 +61,11 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 	const mouseUp = (_: MouseEvent) => {
 		setIsDown(false);
 		setShowArrow(showArrows());
-		slider.current!.classList.remove(styles.sliding);
 	};
 
 	const mouseMove = (e: MouseEvent) => {
 		if (!isDown) return;
 		e.preventDefault();
-		slider.current!.classList.add(styles.sliding);
 		const eventPosition = e.pageX - slider.current!.offsetLeft;
 		const slide = eventPosition - position.startX;
 

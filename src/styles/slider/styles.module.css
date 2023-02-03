@@ -18,7 +18,3 @@
 .slider > * {
 	flex: 0 0 auto;
 }
-
-.sliding > * {
-	pointer-events: none;
-}
