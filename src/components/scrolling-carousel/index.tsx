@@ -9,13 +9,15 @@ import React, {
 import { Item, SlideDirection } from '../../types/carousel';
 import styles from '../../styles/slider/styles.module.css';
 import { getOuterWidth } from '../../helpers';
+import { defaultProps } from './defaultProps';
 
-export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
-	children,
-	className,
-	leftIcon,
-	rightIcon,
-}: SliderProps) => {
+export const ScrollingCarousel: FunctionComponent<SliderProps> = (
+	userProps: SliderProps,
+) => {
+	const { children, className, leftIcon, rightIcon, triggerClickOn } = {
+		...defaultProps,
+		...userProps,
+	};
 	const slider = useRef<HTMLDivElement>(null);
 	const [isDown, setIsDown] = useState(false);
 	const [position, setPosition] = useState({
@@ -61,6 +63,7 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 	const mouseUp = (_: MouseEvent) => {
 		setIsDown(false);
 		setShowArrow(showArrows());
+		slider.current!.classList.remove(styles.sliding);
 	};
 
 	const mouseMove = (e: MouseEvent) => {
@@ -69,6 +72,9 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 		const eventPosition = e.pageX - slider.current!.offsetLeft;
 		const slide = eventPosition - position.startX;
 
+		if (Math.abs(slide) > triggerClickOn) {
+			slider.current!.classList.add(styles.sliding);
+		}
 		slider.current!.scrollLeft = position.scrollLeft - slide;
 	};
 
@@ -134,9 +140,14 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 
 	return (
 		<div className={`${styles.sliderBase} ${className}`} data-testid="carousel">
-			{showArrow.left && getArrow(SlideDirection.Right, 'left', leftIcon)}
-			{showArrow.right && getArrow(SlideDirection.Left, 'right', rightIcon)}
+			{showArrow.left &&
+				leftIcon &&
+				getArrow(SlideDirection.Right, 'left', leftIcon)}
+			{showArrow.right &&
+				rightIcon &&
+				getArrow(SlideDirection.Left, 'right', rightIcon)}
 			<div
+				data-testid="sliderList"
 				ref={ref}
 				onMouseDown={mouseDown}
 				onMouseLeave={mouseUp}
@@ -153,8 +164,9 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = ({
 export interface SliderProps {
 	children: Item[];
 	className?: string;
-	leftIcon?: ReactElement;
-	rightIcon?: ReactElement;
+	leftIcon?: ReactElement | null;
+	rightIcon?: ReactElement | null;
+	triggerClickOn?: number;
 }
 
 export type Arrows = {
