@@ -258,3 +258,19 @@ export const getNavigationSlideAmount = (
 
 	return direction * -1;
 };
+
+export const setAbortableTimeout = (
+	callback: () => void,
+	delay: number,
+	signal: AbortSignal | undefined | null,
+) => {
+	const timer = setTimeout(() => {
+		signal?.removeEventListener('abort', handleAbort);
+		callback();
+	}, delay);
+
+	const handleAbort = () => {
+		clearTimeout(timer);
+	};
+	signal?.addEventListener('abort', handleAbort);
+};

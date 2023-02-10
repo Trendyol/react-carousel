@@ -19,6 +19,7 @@ import {
 	cleanNavigationItems,
 	rotateNavigationItems,
 	getNavigationSlideAmount,
+	setAbortableTimeout,
 } from '../../helpers';
 import { SlideDirection, Item, ArrowKeys } from '../../types/carousel';
 import { defaultProps } from './defaultProps';
@@ -101,6 +102,10 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 		}
 	};
 
+	const abortController = new AbortController();
+	useEffect(() => {
+		return () => abortController.abort();
+	}, []);
 	const slide = (direction: SlideDirection, target?: number) => {
 		if (
 			animation.isSliding ||
@@ -165,46 +170,52 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			}),
 		);
 
-		setTimeout(() => {
-			if (props.infinite) {
-				const cleanedItems = isNavigation
-					? cleanNavigationItems(
-							direction === SlideDirection.Right
-								? itemsRef.current
-								: rotated,
-							getNavigationSlideAmount(
-								target,
-								next,
-								slideAmount,
+		setAbortableTimeout(
+			() => {
+				if (props.infinite) {
+					const cleanedItems = isNavigation
+						? cleanNavigationItems(
+								direction === SlideDirection.Right
+									? itemsRef.current
+									: rotated,
+								getNavigationSlideAmount(
+									target,
+									next,
+									slideAmount,
+									direction,
+								),
 								direction,
-							),
-							direction,
-					  )
-					: cleanItems(
-							direction === SlideDirection.Right
-								? itemsRef.current
-								: rotated,
-							props.slide,
-							direction,
-					  );
+						  )
+						: cleanItems(
+								direction === SlideDirection.Right
+									? itemsRef.current
+									: rotated,
+								props.slide,
+								direction,
+						  );
 
-				setItems(cleanedItems);
-				itemsRef.current = cleanedItems;
-			}
-			setAnimation({
-				transform: props.infinite
-					? getTransformAmount(
-							width,
-							props.navigation ? props.children.length - 1 : props.slide,
-							SlideDirection.Right,
-					  )
-					: animation.transform +
-					  getTransformAmount(width, props.slide, direction),
-				transition: 0,
-				isSliding: false,
-			});
-			autoSwipe();
-		}, props.transition * 1_0_0_0);
+					setItems(cleanedItems);
+					itemsRef.current = cleanedItems;
+				}
+				setAnimation({
+					transform: props.infinite
+						? getTransformAmount(
+								width,
+								props.navigation
+									? props.children.length - 1
+									: props.slide,
+								SlideDirection.Right,
+						  )
+						: animation.transform +
+						  getTransformAmount(width, props.slide, direction),
+					transition: 0,
+					isSliding: false,
+				});
+				autoSwipe();
+			},
+			props.transition * 1_0_0_0,
+			abortController.signal,
+		);
 		isPaginating.current = false;
 	};
 
@@ -254,18 +265,18 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	};
 
 	const onLeftArrowClick = () => {
-		slide(SlideDirection.Left)
+		slide(SlideDirection.Left);
 		if (props.onLeftArrowClick) {
 			props.onLeftArrowClick();
 		}
-	}
+	};
 
 	const onRightArrowClick = () => {
-		slide(SlideDirection.Right)
+		slide(SlideDirection.Right);
 		if (props.onRightArrowClick) {
 			props.onRightArrowClick();
 		}
-	}
+	};
 
 	return (
 		<div
