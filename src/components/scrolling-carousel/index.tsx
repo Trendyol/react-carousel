@@ -133,7 +133,7 @@ export const ScrollingCarousel: FunctionComponent<SliderProps> = (
 	) => {
 		return (
 			<div data-arrow={data} onClick={() => slide(direction)}>
-				{element ?? <button />}
+				{element ?? <button aria-label={`${data === "right" ? "Sağa" : "Sola"} kaydır`} />}
 			</div>
 		);
 	};
