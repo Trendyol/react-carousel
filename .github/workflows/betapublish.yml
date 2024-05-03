@@ -18,14 +18,13 @@ jobs:
         run: npm install
       - name: Test
         run: npm run test
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v4
         with:
           files: coverage/*.json
           flags: unittests
           name: react-carousel-codecov
           fail_ci_if_error: true
           verbose: true 
-          token: ${{ secrets.CODE_COV_API_TOKEN }}
       - name: Build
         run: npm run build
       - name: Publish

@@ -22,14 +22,13 @@ jobs:
               run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
             - name: Test
               run: npm run test
-            - uses: codecov/codecov-action@v2
+            - uses: codecov/codecov-action@v4
               with:
                   files: coverage/*.json
                   flags: unittests
                   name: react-carousel-codecov
                   fail_ci_if_error: true
                   verbose: true
-                  token: ${{ secrets.CODE_COV_API_TOKEN }}
     lint:
         runs-on: ubuntu-latest
         permissions:
