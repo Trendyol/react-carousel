@@ -29,6 +29,7 @@ jobs:
                   name: react-carousel-codecov
                   fail_ci_if_error: true
                   verbose: true
+                  token: ${{ secrets.CODE_COV_API_TOKEN }}
     lint:
         runs-on: ubuntu-latest
         permissions:
