@@ -55,7 +55,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	const [page, setPage] = useState<number>(0);
 	const isPaginating = useRef(false);
 	const slideButtonRef = useRef<HTMLDivElement>(null);
-	const autoSwipeTimer = useRef<number>();
+	const autoSwipeTimer = useRef<number>(0);
 	const isNavigation = typeof props.navigation === 'function';
 
 	if (props.dynamic) {
@@ -93,10 +93,8 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			typeof props.autoSwipe === 'number' &&
 			props.autoSwipe > props.transition
 		) {
-			autoSwipeTimer.current = setTimeout(() => {
-				if (slideButtonRef.current) {
-					slideButtonRef.current!.click();
-				}
+			autoSwipeTimer.current = window.setTimeout(() => {
+				slide(SlideDirection.Right);
 			}, props.autoSwipe);
 		}
 	};
@@ -254,18 +252,18 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	};
 
 	const onLeftArrowClick = () => {
-		slide(SlideDirection.Left)
+		slide(SlideDirection.Left);
 		if (props.onLeftArrowClick) {
 			props.onLeftArrowClick();
 		}
-	}
+	};
 
 	const onRightArrowClick = () => {
-		slide(SlideDirection.Right)
+		slide(SlideDirection.Right);
 		if (props.onRightArrowClick) {
 			props.onRightArrowClick();
 		}
-	}
+	};
 
 	return (
 		<div
