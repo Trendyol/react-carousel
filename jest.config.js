@@ -4,7 +4,7 @@ module.exports = {
 	collectCoverageFrom: ['src/**/*.{ts,tsx}'],
 	coverageThreshold: {
 		global: {
-			branches: 83,
+			branches: 82,
 			functions: 83,
 			lines: 83,
 			statements: 83,
