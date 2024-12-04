@@ -17,10 +17,11 @@ export const defaultProps: Required<CarouselProps> = {
 	pageCount: 0,
 	rightArrow: null,
 	leftArrow: null,
+	arrowLogicOnEndOfPage: 'hide',
 	autoSwipe: null,
 	navigation: null,
 	triggerClickOn: Number.MIN_SAFE_INTEGER,
 	hideArrows: false,
 	onLeftArrowClick: () => null,
-	onRightArrowClick: () => null
+	onRightArrowClick: () => null,
 };

@@ -254,18 +254,29 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 	};
 
 	const onLeftArrowClick = () => {
-		slide(SlideDirection.Left)
+		slide(SlideDirection.Left);
 		if (props.onLeftArrowClick) {
 			props.onLeftArrowClick();
 		}
-	}
+	};
 
 	const onRightArrowClick = () => {
-		slide(SlideDirection.Right)
+		slide(SlideDirection.Right);
 		if (props.onRightArrowClick) {
 			props.onRightArrowClick();
 		}
-	}
+	};
+	const showLeftArrow =
+		props.arrowLogicOnEndOfPage === 'disable' ||
+		(props.arrowLogicOnEndOfPage === 'hide' && showArrow.left);
+	const showRightArrow =
+		props.arrowLogicOnEndOfPage === 'disable' ||
+		(props.arrowLogicOnEndOfPage === 'hide' && showArrow.right);
+
+	const leftArrowClassnames =
+		props.arrowLogicOnEndOfPage === 'disable' && !showArrow.left ? 'disabled' : '';
+	const rightArrowClassnames =
+		props.arrowLogicOnEndOfPage === 'disable' && !showArrow.right ? 'disabled' : '';
 
 	return (
 		<div
@@ -275,8 +286,8 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 			{...(props.useArrowKeys ? { onKeyDown: handleOnKeyDown } : {})}
 			className={`${styles.carouselBase} ${props.className}`}
 		>
-			{showArrow.left && (
-				<div onClick={onLeftArrowClick}>
+			{!!showLeftArrow && (
+				<div className={leftArrowClassnames} onClick={onLeftArrowClick}>
 					{props.leftArrow ?? <Arrow direction="left" />}
 				</div>
 			)}
@@ -289,8 +300,12 @@ export const Carousel: FunctionComponent<CarouselProps> = (userProps: CarouselPr
 				dragCallback={dragCallback}
 				widthCallBack={widthCallBack}
 			/>
-			{showArrow.right && (
-				<div onClick={onRightArrowClick} ref={slideButtonRef}>
+			{!!showRightArrow && (
+				<div
+					className={rightArrowClassnames}
+					onClick={onRightArrowClick}
+					ref={slideButtonRef}
+				>
 					{props.rightArrow ?? <Arrow direction="right" />}
 				</div>
 			)}
@@ -324,6 +339,7 @@ export interface CarouselProps {
 	pageCount?: number;
 	leftArrow?: ReactElement | null;
 	rightArrow?: ReactElement | null;
+	arrowLogicOnEndOfPage?: 'hide' | 'disable';
 	autoSwipe?: number | null;
 	navigation?: null | ((selected: boolean) => ReactElement);
 	triggerClickOn?: number;
