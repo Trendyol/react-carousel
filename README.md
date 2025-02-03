@@ -1,3 +1,5 @@
+
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Trendyol/react-carousel/badge)](https://scorecard.dev/viewer/?uri=github.com/Trendyol/react-carousel)
 # React Carousel
 
 ![Release](https://github.com/trendyol/react-carousel/actions/workflows/publish.yml/badge.svg)
