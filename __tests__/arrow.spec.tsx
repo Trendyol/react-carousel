@@ -12,4 +12,14 @@ describe('<Arrow />', () => {
 		fireEvent.click(getByRole('button'));
 		expect(onClick).toHaveBeenCalled();
 	});
+
+	it('should have the correct aria-label when direction is right', () => {
+		const { getByRole } = render(<Arrow direction="right" />);
+		expect(getByRole('button')).toHaveAttribute('aria-label', 'Sağa kaydır');
+	});
+
+	it('should have the correct aria-label when direction is left', () => {
+		const { getByRole } = render(<Arrow direction="left" />);
+		expect(getByRole('button')).toHaveAttribute('aria-label', 'Sola kaydır');
+	});
 });

@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { render, cleanup, fireEvent, wait } from '@testing-library/react';
+import { render, cleanup, fireEvent, wait, waitFor } from '@testing-library/react';
 import { ScrollingCarousel } from '../src';
 import { carouselItemNodes } from './__fixtures__/nodes';
 import * as helpers from '../src/helpers';
@@ -100,6 +100,25 @@ describe('<ScrollingCarousel />', () => {
 
 		wait(() => {
 			expect(container.querySelector('.sliding')).toBeInTheDocument();
+		});
+	});
+
+	it('should remove sliding class when isDown is false', async () => {
+		const { getByTestId } = render(
+			<ScrollingCarousel
+				triggerClickOn={3}
+				leftIcon={<i />}
+				children={carouselItemNodes(6)}
+			/>,
+		);
+
+		const sliderList = getByTestId('sliderList');
+		fireEvent.mouseDown(sliderList, { pageX: 600 });
+		fireEvent.mouseMove(sliderList, { pageX: 605 }); // Ensure some movement occurs
+		fireEvent.mouseUp(sliderList);
+
+		await waitFor(() => {
+			expect(sliderList).not.toHaveClass('sliding');
 		});
 	});
 });
