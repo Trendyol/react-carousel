@@ -2,6 +2,7 @@
 
 ![Release](https://github.com/trendyol/react-carousel/actions/workflows/publish.yml/badge.svg)
 ![Pre-Release](https://github.com/trendyol/react-carousel/actions/workflows/betapublish.yml/badge.svg)
+[![libs.tech recommends](https://libs.tech/project/253777842/badge.svg)](https://libs.tech/project/253777842/react-carousel)
 [![codecov.io](https://codecov.io/github/Trendyol/react-carousel/coverage.svg?branch=master)](https://codecov.io/github/Trendyol/react-carousel?branch=master)
 [![badgen.net](https://badgen.net/bundlephobia/minzip/@trendyol-js/react-carousel)](https://badgen.net/bundlephobia/minzip/@trendyol-js/react-carousel)
 [![npm version](https://badge.fury.io/js/%40trendyol-js%2Freact-carousel.svg)](https://badge.fury.io/js/%40trendyol-js%2Freact-carousel)
